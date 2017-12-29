@@ -1,0 +1,128 @@
+ databaseChangeLog:
+   - changeSet:
+       id: 1
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: bug
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: title
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: description
+                   type: varchar(1000)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: owner
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: priority
+                   type: int
+                   constraints:
+                     nullable: false
+               - column:
+                   name: status
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: user_story_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+   - changeSet:
+       id: 2
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: task
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: title
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: description
+                   type: varchar(1000)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: owner
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: priority
+                   type: int
+                   constraints:
+                     nullable: false
+               - column:
+                   name: status
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: user_story_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+   - changeSet:
+       id: 3
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: user_story
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: title
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: description
+                   type: varchar(1000)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: owner
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: priority
+                   type: int
+                   constraints:
+                     nullable: false
+               - column:
+                   name: estimation
+                   type: int
+                   constraints:
+                     nullable: false
