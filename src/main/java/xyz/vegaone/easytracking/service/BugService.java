@@ -63,6 +63,6 @@ public class BugService {
         savedBug.setUserStory(bug.getUserStory());
 
         return savedBug;
-    } 
+    }
 
 }
