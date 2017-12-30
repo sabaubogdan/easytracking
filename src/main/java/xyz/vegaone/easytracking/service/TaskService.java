@@ -12,6 +12,8 @@ import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.TaskRepo;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
+import java.util.Optional;
+
 @Service
 public class TaskService {
 
@@ -40,15 +42,27 @@ public class TaskService {
     }
 
     public Task getTask(Long id){
-        TaskEntity taskEntity = taskRepo.findById(id).get();
-        Task task = taskMapper.domainToDto(taskEntity);
+        Optional<TaskEntity> taskOptional = taskRepo.findById(id);
 
-        UserStoryEntity userStoryEntity = userStoryRepo.findById(taskEntity.getUserStoryId()).get();
-        UserStory userStory = userStoryMapper.domainToDto(userStoryEntity);
+        if (taskOptional.isPresent()) {
+            TaskEntity taskEntity = taskOptional.get();
 
-        task.setUserStory(userStory);
+            Task task = taskMapper.domainToDto(taskEntity);
 
-        return task;
+            Optional<UserStoryEntity> userStoryOptional = userStoryRepo.findById(taskEntity.getUserStoryId());
+
+            UserStory userStory = null;
+
+            if (userStoryOptional.isPresent()) {
+                userStory = userStoryMapper.domainToDto(userStoryOptional.get());
+            }
+
+            task.setUserStory(userStory);
+
+            return task;
+        }
+
+        return null;
     }
 
     public void deleteTask(Long id){

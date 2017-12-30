@@ -11,6 +11,8 @@ import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.BugRepo;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
+import java.util.Optional;
+
 @Service
 public class BugService {
 
@@ -26,7 +28,7 @@ public class BugService {
     @Autowired
     private UserStoryMapper userStoryMapper;
 
-    public Bug createBug(Bug bug){
+    public Bug createBug(Bug bug) {
 
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
         bugEntity.setUserStoryId(bug.getUserStory().getId());
@@ -38,23 +40,33 @@ public class BugService {
         return savedBug;
     }
 
-    public Bug getBug(Long id){
-        BugEntity bugEntity = bugRepo.findById(id).get();
-        Bug bug = bugMapper.domainToDto(bugEntity);
+    public Bug getBug(Long id) {
+        Optional<BugEntity> bugOptional = bugRepo.findById(id);
 
-        UserStoryEntity userStoryEntity = userStoryRepo.findById(bugEntity.getUserStoryId()).get();
-        UserStory userStory = userStoryMapper.domainToDto(userStoryEntity);
+        if (bugOptional.isPresent()) {
+            BugEntity bugEntity = bugOptional.get();
+            Bug bug = bugMapper.domainToDto(bugEntity);
 
-        bug.setUserStory(userStory);
+            Optional<UserStoryEntity> userStoryOptional = userStoryRepo.findById(bugEntity.getUserStoryId());
 
-        return bug;
+            if (userStoryOptional.isPresent()) {
+                UserStoryEntity userStoryEntity = userStoryOptional.get();
+                UserStory userStory = userStoryMapper.domainToDto(userStoryEntity);
+
+                bug.setUserStory(userStory);
+            }
+
+            return bug;
+        }
+
+        return null;
     }
 
-    public void deleteBug(Long id){
+    public void deleteBug(Long id) {
         bugRepo.deleteById(id);
     }
 
-    public Bug updateBug(Bug bug){
+    public Bug updateBug(Bug bug) {
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
         bugEntity.setUserStoryId(bug.getUserStory().getId());
 

@@ -65,18 +65,12 @@
                - column:
                    name: description
                    type: varchar(1000)
-                   constraints:
-                     nullable: false
                - column:
                    name: owner
                    type: varchar(50)
-                   constraints:
-                     nullable: false
                - column:
                    name: priority
                    type: int
-                   constraints:
-                     nullable: false
                - column:
                    name: status
                    type: varchar(50)
@@ -109,20 +103,12 @@
                - column:
                    name: description
                    type: varchar(1000)
-                   constraints:
-                     nullable: false
                - column:
                    name: owner
                    type: varchar(50)
-                   constraints:
-                     nullable: false
                - column:
                    name: priority
                    type: int
-                   constraints:
-                     nullable: false
                - column:
                    name: estimation
                    type: int
-                   constraints:
-                     nullable: false

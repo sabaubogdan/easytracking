@@ -8,6 +8,7 @@ import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.Optional;
 
 @Service
 public class UserStoryService {
@@ -28,7 +29,12 @@ public class UserStoryService {
     }
 
     public UserStory getUserStory(Long id){
-        UserStoryEntity userStoryEntity = userStoryRepo.findById(id).get();
+        Optional<UserStoryEntity> getResultOptional = userStoryRepo.findById(id);
+        UserStoryEntity userStoryEntity = null;
+
+        if (getResultOptional.isPresent()) {
+            userStoryEntity = getResultOptional.get();
+        }
         UserStory userStory = userStoryMapper.domainToDto(userStoryEntity);
 
         return userStory;

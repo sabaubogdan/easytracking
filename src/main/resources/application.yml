@@ -1,6 +1,6 @@
 spring:
   datasource:
-    jdbcUrl: jdbc:mysql://localhost:3306/easytrack?autoReconnect=true&useSSL=false
+    jdbcUrl: jdbc:mysql://localhost:3306/easytracking?autoReconnect=true&useSSL=false
     username: easytrackinguser
     password: EasyTracking1!
     driver-class-name: com.mysql.jdbc.Driver
