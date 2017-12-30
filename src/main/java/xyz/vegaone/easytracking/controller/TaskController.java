@@ -17,7 +17,7 @@ public class TaskController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Task getTask(@PathVariable(value = "id") Long id){
+    public Task getTask(@PathVariable(value = "id") Long id) {
 
         Task task = taskService.getTask(id);
 
@@ -27,18 +27,16 @@ public class TaskController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Task createTask(@RequestBody Task task){
+    public Task createTask(@RequestBody Task task) {
 
         Task createdTask = taskService.createTask(task);
 
         return createdTask;
-
-
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Task updateTask(@RequestBody Task task){
+    public Task updateTask(@RequestBody Task task) {
         Task updatedTask = taskService.updateTask(task);
 
         return updatedTask;
@@ -46,7 +44,7 @@ public class TaskController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTask(@PathVariable(value = "id") Long id){
+    public void deleteTask(@PathVariable(value = "id") Long id) {
         taskService.deleteTask(id);
     }
 }
