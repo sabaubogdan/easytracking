@@ -6,6 +6,7 @@ import xyz.vegaone.easytracking.domain.UserStoryEntity;
 import xyz.vegaone.easytracking.dto.UserStory;
 import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
+import java.util.*;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.Optional;
@@ -18,6 +19,18 @@ public class UserStoryService {
 
     @Autowired
     private UserStoryRepo userStoryRepo;
+
+    public List<UserStory> findAllByProjectId(Long id){
+        List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);
+
+        List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
+
+        return userStoryList;
+    }
+
+    public void deleteAllByProjectId(Long id){
+        userStoryRepo.deleteAllByProjectId(id);
+    }
 
     public UserStory createUserStory(UserStory userStory){
 

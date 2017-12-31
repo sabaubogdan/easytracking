@@ -26,6 +26,17 @@ public class UserStoryEntity {
     @Column(name = "estimation")
     private Integer estimation;
 
+    @Column(name = "project_id")
+    private Long projectId;
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
     public Long getId() {
         return id;
     }

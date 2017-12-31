@@ -112,3 +112,37 @@
                - column:
                    name: estimation
                    type: int
+   - changeSet:
+        id: 4
+        author: Bogdan
+        changes:
+          - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: project_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+   - changeSet:
+       id: 5
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: project
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: name
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: description
+                   type: varchar(1000)
