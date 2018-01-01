@@ -8,7 +8,7 @@ import xyz.vegaone.easytracking.dto.Bug;
 import xyz.vegaone.easytracking.service.BugService;
 
 @RestController
-@RequestMapping(value = "/bug")
+@RequestMapping(value = "/api/bug")
 @Slf4j
 public class BugController {
 

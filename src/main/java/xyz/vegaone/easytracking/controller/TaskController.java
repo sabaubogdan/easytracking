@@ -8,7 +8,7 @@ import xyz.vegaone.easytracking.dto.Task;
 import xyz.vegaone.easytracking.service.TaskService;
 
 @RestController
-@RequestMapping(value = "/task")
+@RequestMapping(value = "/api/task")
 @Slf4j
 public class TaskController {
 
