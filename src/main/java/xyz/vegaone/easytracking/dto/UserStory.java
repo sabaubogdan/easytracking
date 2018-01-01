@@ -14,6 +14,8 @@ public class UserStory {
 
     private Integer estimation;
 
+    private String status;
+
     private Long projectId;
 
     public Long getProjectId() {
@@ -70,5 +72,13 @@ public class UserStory {
 
     public void setEstimation(Integer estimation) {
         this.estimation = estimation;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

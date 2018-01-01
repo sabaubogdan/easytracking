@@ -16,3 +16,5 @@ spring:
     cacheServerConfiguration: true
     elideSetAutoCommits: true
     maintainTimeStats: false
+server:
+  port: 8100

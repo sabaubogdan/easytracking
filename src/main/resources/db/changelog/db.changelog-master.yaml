@@ -146,3 +146,15 @@
                - column:
                    name: description
                    type: varchar(1000)
+   - changeSet:
+        id: 5
+        author: Dragos
+        changes:
+          - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: status
+                   type: varchar(20)
+                   constraints:
+                     nullable: false
