@@ -1,5 +1,7 @@
 package xyz.vegaone.easytracking.dto;
 
+import java.util.List;
+
 public class UserStory {
 
     private Long id;
@@ -17,6 +19,16 @@ public class UserStory {
     private String status;
 
     private Long projectId;
+
+    private List<Task> taskList;
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
 
     public Long getProjectId() {
         return projectId;
