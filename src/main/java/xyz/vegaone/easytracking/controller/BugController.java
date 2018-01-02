@@ -22,7 +22,7 @@ public class BugController {
         Bug bug = bugService.getBug(id);
 
         return bug;
-
+    
     }
 
     @PostMapping
