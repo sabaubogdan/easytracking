@@ -2,11 +2,13 @@ package xyz.vegaone.easytracking.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.vegaone.easytracking.domain.UserStoryEntity;
 import xyz.vegaone.easytracking.dto.UserStory;
 import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +46,7 @@ public class UserStoryService {
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserStoryEntity = userStoryRepo.save(userStoryEntity);
         UserStory savedUserStory = userStoryMapper.domainToDto(savedUserStoryEntity);
+        savedUserStory.setTaskList(Collections.emptyList());
 
         return savedUserStory;
     }
@@ -65,6 +68,7 @@ public class UserStoryService {
         return userStory;
     }
 
+    @Transactional
     public void deleteUserStory(Long id) {
         taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteById(id);
@@ -74,6 +78,9 @@ public class UserStoryService {
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserEntity = userStoryRepo.save(userStoryEntity);
 
-        return userStoryMapper.domainToDto(savedUserEntity);
+        UserStory updatedUserStory = userStoryMapper.domainToDto(savedUserEntity);
+        updatedUserStory.setTaskList(taskService.findAllByUserStoryId(updatedUserStory.getId()));
+
+        return updatedUserStory;
     }
 }

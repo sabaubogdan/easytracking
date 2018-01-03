@@ -106,7 +106,6 @@ public class UserStoryServiceTest {
     }
 
     @Test
-    @Ignore
     public void deleteUserStoryTest(){
         //given
         UserStory userStory = new UserStory();
