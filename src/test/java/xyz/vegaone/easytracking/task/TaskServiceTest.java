@@ -32,11 +32,15 @@ public class TaskServiceTest {
 
     public static final String NEWUSERSTORY_TITLE = "New user story";
 
-    @Autowired
     private TaskService taskService;
 
-    @Autowired
     private UserStoryService userStoryService;
+
+    @Autowired
+    public TaskServiceTest(TaskService taskService, UserStoryService userStoryService) {
+        this.taskService = taskService;
+        this.userStoryService = userStoryService;
+    }
 
     @Test
     public void createTaskTest() {

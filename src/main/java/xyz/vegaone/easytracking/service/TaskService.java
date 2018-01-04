@@ -14,11 +14,15 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    @Autowired
     private TaskRepo taskRepo;
 
-    @Autowired
     private TaskMapper taskMapper;
+
+    @Autowired
+    public TaskService(TaskRepo taskRepo, TaskMapper taskMapper) {
+        this.taskRepo = taskRepo;
+        this.taskMapper = taskMapper;
+    }
 
     public Task createTask(Task task) {
 

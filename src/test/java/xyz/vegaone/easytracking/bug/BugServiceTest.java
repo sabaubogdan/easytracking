@@ -29,11 +29,15 @@ public class BugServiceTest {
 
     public static final String NEWBUG_TITLE="New bug title";
 
-    @Autowired
     private UserStoryService userStoryService;
 
-    @Autowired
     private BugService bugService;
+
+    @Autowired
+    public BugServiceTest(UserStoryService userStoryService, BugService bugService) {
+        this.userStoryService = userStoryService;
+        this.bugService = bugService;
+    }
 
     @Test
     public void createBugTest(){

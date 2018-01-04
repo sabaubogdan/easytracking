@@ -28,11 +28,15 @@ public class ProjectServiceTest {
     public static final String PROJECT_NAME="Project name";
     public static final String PROJECT_NEW_NAME="Project new name";
 
-    @Autowired
     private ProjectService projectService;
 
-    @Autowired
     private UserStoryService userStoryService;
+
+    @Autowired
+    public ProjectServiceTest(ProjectService projectService, UserStoryService userStoryService) {
+        this.projectService = projectService;
+        this.userStoryService = userStoryService;
+    }
 
     @Test
     public void createProjectTest(){

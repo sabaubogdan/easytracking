@@ -33,11 +33,15 @@ public class UserStoryServiceTest {
 
     public static final String NEW_TITLE = "New test title";
 
-    @Autowired
     private UserStoryService userStoryService;
 
-    @Autowired
     private TaskService taskService;
+
+    @Autowired
+    public UserStoryServiceTest(UserStoryService userStoryService, TaskService taskService) {
+        this.userStoryService = userStoryService;
+        this.taskService = taskService;
+    }
 
     @Test
     public void createUserStoryTest(){
