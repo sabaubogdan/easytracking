@@ -158,3 +158,37 @@
                    type: varchar(20)
                    constraints:
                      nullable: false
+   - changeSet:
+       id: 6
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: bug
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: name
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: user_story_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+               - column:
+                   name: task_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+               - column:
+                   name: bug_id
+                   type: bigint
+                   constraints:
+                     nullable: false
