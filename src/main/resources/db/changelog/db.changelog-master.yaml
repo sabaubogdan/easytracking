@@ -163,7 +163,7 @@
        author: Bogdan
        changes:
          - createTable:
-             tableName: bug
+             tableName: tag
              columns:
                - column:
                    name: id
