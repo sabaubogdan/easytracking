@@ -24,6 +24,9 @@ public class UserStoryService {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private BugService bugService;
+
     public List<UserStory> findAllByProjectId(Long id) {
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);
 
@@ -31,6 +34,10 @@ public class UserStoryService {
 
         for (UserStory userStory : userStoryList) {
             userStory.setTaskList(taskService.findAllByUserStoryId(userStory.getId()));
+        }
+
+        for (UserStory userStory : userStoryList) {
+            userStory.setBugList(bugService.findAllByUserStoryId(userStory.getId()));
         }
 
         return userStoryList;
@@ -47,6 +54,7 @@ public class UserStoryService {
         UserStoryEntity savedUserStoryEntity = userStoryRepo.save(userStoryEntity);
         UserStory savedUserStory = userStoryMapper.domainToDto(savedUserStoryEntity);
         savedUserStory.setTaskList(Collections.emptyList());
+        savedUserStory.setBugList(Collections.emptyList());
 
         return savedUserStory;
     }
@@ -65,12 +73,17 @@ public class UserStoryService {
             userStory.setTaskList(taskService.findAllByUserStoryId(id));
         }
 
+        if (userStory != null) {
+            userStory.setBugList(bugService.findAllByUserStoryId(id));
+        }
+
         return userStory;
     }
 
     @Transactional
     public void deleteUserStory(Long id) {
         taskService.deleteAllByUserStoryId(id);
+        bugService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteById(id);
     }
 
@@ -80,6 +93,7 @@ public class UserStoryService {
 
         UserStory updatedUserStory = userStoryMapper.domainToDto(savedUserEntity);
         updatedUserStory.setTaskList(taskService.findAllByUserStoryId(updatedUserStory.getId()));
+        updatedUserStory.setBugList(bugService.findAllByUserStoryId(updatedUserStory.getId()));
 
         return updatedUserStory;
     }
