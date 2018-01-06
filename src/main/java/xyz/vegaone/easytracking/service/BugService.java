@@ -14,11 +14,16 @@ import java.util.Optional;
 @Service
 public class BugService {
 
-    @Autowired
     private BugRepo bugRepo;
 
-    @Autowired
     private BugMapper bugMapper;
+
+    @Autowired
+    public BugService(BugRepo bugRepo,
+                      BugMapper bugMapper) {
+        this.bugRepo = bugRepo;
+        this.bugMapper = bugMapper;
+    }
 
     public Bug createBug(Bug bug) {
 

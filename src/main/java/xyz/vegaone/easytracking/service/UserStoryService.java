@@ -15,17 +15,24 @@ import java.util.Optional;
 @Service
 public class UserStoryService {
 
-    @Autowired
     private UserStoryMapper userStoryMapper;
 
-    @Autowired
     private UserStoryRepo userStoryRepo;
 
-    @Autowired
     private TaskService taskService;
 
-    @Autowired
     private BugService bugService;
+
+    @Autowired
+    public UserStoryService(UserStoryMapper userStoryMapper,
+                            UserStoryRepo userStoryRepo,
+                            TaskService taskService,
+                            BugService bugService) {
+        this.userStoryMapper = userStoryMapper;
+        this.userStoryRepo = userStoryRepo;
+        this.taskService = taskService;
+        this.bugService = bugService;
+    }
 
     public List<UserStory> findAllByProjectId(Long id) {
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);

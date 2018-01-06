@@ -10,8 +10,13 @@ import javax.sql.DataSource;
 
 @Configuration
 public class EasyTrackConfig {
-    @Autowired
+
     private SpringProperties springProperties;
+
+    @Autowired
+    public EasyTrackConfig(SpringProperties springProperties) {
+        this.springProperties = springProperties;
+    }
 
     @Bean
     @LiquibaseDataSource
@@ -23,5 +28,4 @@ public class EasyTrackConfig {
 
         return hikariDataSource;
     }
-
 }
