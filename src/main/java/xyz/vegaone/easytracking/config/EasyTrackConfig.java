@@ -23,5 +23,4 @@ public class EasyTrackConfig {
 
         return hikariDataSource;
     }
-
 }

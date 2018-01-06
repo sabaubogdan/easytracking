@@ -19,20 +19,25 @@ import java.util.Optional;
 @Service
 public class ProjectService {
 
-    @Autowired
     private ProjectMapper projectMapper;
 
-    @Autowired
     private ProjectRepo projectRepo;
 
-    @Autowired
     private UserStoryService userStoryService;
 
-    @Autowired
     private UserStoryRepo userStoryRepo;
 
-    @Autowired
     private UserStoryMapper userStoryMapper;
+
+    @Autowired
+    public ProjectService(ProjectMapper projectMapper, ProjectRepo projectRepo, UserStoryService userStoryService,
+                          UserStoryRepo userStoryRepo, UserStoryMapper userStoryMapper) {
+        this.projectMapper = projectMapper;
+        this.projectRepo = projectRepo;
+        this.userStoryService = userStoryService;
+        this.userStoryRepo = userStoryRepo;
+        this.userStoryMapper = userStoryMapper;
+    }
 
     public Project createProject(Project project){
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);

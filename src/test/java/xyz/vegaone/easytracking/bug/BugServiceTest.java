@@ -1,6 +1,5 @@
 package xyz.vegaone.easytracking.bug;
 
-import org.h2.engine.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +19,8 @@ public class BugServiceTest {
     public static final String USERSTORY_OWNER = "Test OWNER";
     public static final Integer USERSTORY_ESTIMATION = 123456;
     public static final Integer USERSTORY_PRIORITY = 1;
+    public static final Long USERSTORY_PROJECT_ID = 1L;
+    public static final String USERSTORY_STATUS = "Temporary status";
 
     public static final String BUG_DESCRIPTION = "Bug description";
     public static final String BUG_OWNER = "Bug owner";
@@ -35,17 +36,24 @@ public class BugServiceTest {
     @Autowired
     private BugService bugService;
 
+    private UserStory buildAndSaveUserStory(){
+        UserStory userStory = new UserStory();
+        userStory.setTitle(USERSTORY_TITLE);
+        userStory.setDescription(USERSTORY_DESCRIPTION);
+        userStory.setOwner(USERSTORY_OWNER);
+        userStory.setEstimation(USERSTORY_ESTIMATION);
+        userStory.setPriority(USERSTORY_PRIORITY);
+        userStory.setStatus(USERSTORY_STATUS);
+        userStory.setProjectId(USERSTORY_PROJECT_ID);
+
+        return userStory;
+    }
+
     @Test
     public void createBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStory(savedUserStory);
@@ -72,14 +80,8 @@ public class BugServiceTest {
     @Test
     public void getBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStory(savedUserStory);
@@ -108,14 +110,8 @@ public class BugServiceTest {
     @Test
     public void deleteBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStory(savedUserStory);
@@ -138,14 +134,8 @@ public class BugServiceTest {
     @Test
     public void updateBugService(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStory(savedUserStory);

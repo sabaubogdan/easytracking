@@ -15,14 +15,18 @@ import java.util.Optional;
 @Service
 public class UserStoryService {
 
-    @Autowired
     private UserStoryMapper userStoryMapper;
 
-    @Autowired
     private UserStoryRepo userStoryRepo;
 
-    @Autowired
     private TaskService taskService;
+
+    @Autowired
+    public UserStoryService(UserStoryMapper userStoryMapper, UserStoryRepo userStoryRepo, TaskService taskService) {
+        this.userStoryMapper = userStoryMapper;
+        this.userStoryRepo = userStoryRepo;
+        this.taskService = taskService;
+    }
 
     public List<UserStory> findAllByProjectId(Long id) {
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);
@@ -37,7 +41,7 @@ public class UserStoryService {
     }
 
     public void deleteAllByProjectId(Long id) {
-        //delete tasks asociated with the user stories first
+        taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteAllByProjectId(id);
     }
 

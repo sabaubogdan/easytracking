@@ -38,9 +38,7 @@ public class TaskServiceTest {
     @Autowired
     private UserStoryService userStoryService;
 
-    @Test
-    public void createTaskTest() {
-        //given
+    private UserStory buildAndSaveUserStory(){
         UserStory userStory = new UserStory();
         userStory.setTitle(USERSTORY_TITLE);
         userStory.setDescription(USERSTORY_DESCRIPTION);
@@ -50,7 +48,13 @@ public class TaskServiceTest {
         userStory.setProjectId(PROJECT_ID);
         userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        return userStory;
+    }
+
+    @Test
+    public void createTaskTest() {
+        //given
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -63,7 +67,6 @@ public class TaskServiceTest {
         Task savedTask = taskService.createTask(task);
 
         //then
-//        savedTask.getUserStory().getId() == savedUserStory.getId();
         Assert.assertNotNull("There should have been onr task saved in the database", savedTask);
         Assert.assertEquals("User story id should match the user story task id", savedUserStory.getId(), savedTask.getUserStoryId());
         Assert.assertEquals("The userStory name should have matched", TITLE, savedTask.getTitle());
@@ -76,16 +79,8 @@ public class TaskServiceTest {
     @Test
     public void getTaskTest() {
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -112,16 +107,8 @@ public class TaskServiceTest {
     @Test
     public void deleteTaskTest() {
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -143,16 +130,8 @@ public class TaskServiceTest {
     @Test
     public void updateTaskTest() {
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -175,16 +154,8 @@ public class TaskServiceTest {
     @Test
     public void findAllByUserStoryIdTest() {
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
