@@ -1,6 +1,5 @@
 package xyz.vegaone.easytracking.bug;
 
-import org.h2.engine.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -63,7 +63,6 @@ public class TaskServiceTest {
         Task savedTask = taskService.createTask(task);
 
         //then
-//        savedTask.getUserStory().getId() == savedUserStory.getId();
         Assert.assertNotNull("There should have been onr task saved in the database", savedTask);
         Assert.assertEquals("User story id should match the user story task id", savedUserStory.getId(), savedTask.getUserStoryId());
         Assert.assertEquals("The userStory name should have matched", TITLE, savedTask.getTitle());
