@@ -1,6 +1,5 @@
 package xyz.vegaone.easytracking.bug;
 
-import org.h2.engine.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,15 +28,11 @@ public class BugServiceTest {
 
     public static final String NEWBUG_TITLE="New bug title";
 
+    @Autowired
     private UserStoryService userStoryService;
 
-    private BugService bugService;
-
     @Autowired
-    public BugServiceTest(UserStoryService userStoryService, BugService bugService) {
-        this.userStoryService = userStoryService;
-        this.bugService = bugService;
-    }
+    private BugService bugService;
 
     @Test
     public void createBugTest(){

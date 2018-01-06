@@ -1,8 +1,8 @@
 package xyz.vegaone.easytracking.userstory;
 
 
+import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +33,11 @@ public class UserStoryServiceTest {
 
     public static final String NEW_TITLE = "New test title";
 
+    @Autowired
     private UserStoryService userStoryService;
 
-    private TaskService taskService;
-
     @Autowired
-    public UserStoryServiceTest(UserStoryService userStoryService, TaskService taskService) {
-        this.userStoryService = userStoryService;
-        this.taskService = taskService;
-    }
+    private TaskService taskService;
 
     @Test
     public void createUserStoryTest(){
