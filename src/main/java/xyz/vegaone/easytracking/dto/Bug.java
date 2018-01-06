@@ -14,7 +14,7 @@ public class Bug {
 
     private String status;
 
-    private UserStory userStory;
+    private Long userStoryId;
 
     public Long getId() {
         return id;
@@ -64,11 +64,11 @@ public class Bug {
         this.status = status;
     }
 
-    public UserStory getUserStory() {
-        return userStory;
+    public Long getUserStoryId() {
+        return userStoryId;
     }
 
-    public void setUserStory(UserStory userStory) {
-        this.userStory = userStory;
+    public void setUserStoryId(Long userStoryId) {
+        this.userStoryId = userStoryId;
     }
 }

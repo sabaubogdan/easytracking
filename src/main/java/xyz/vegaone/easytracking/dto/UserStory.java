@@ -22,6 +22,8 @@ public class UserStory {
 
     private List<Task> taskList;
 
+    private List<Bug> bugList;
+
     public List<Task> getTaskList() {
         return taskList;
     }
@@ -92,5 +94,13 @@ public class UserStory {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Bug> getBugList() {
+        return bugList;
+    }
+
+    public void setBugList(List<Bug> bugList) {
+        this.bugList = bugList;
     }
 }
