@@ -2,7 +2,6 @@ package xyz.vegaone.easytracking.userstory;
 
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,19 +32,13 @@ public class UserStoryServiceTest {
 
     public static final String NEW_TITLE = "New test title";
 
+    @Autowired
     private UserStoryService userStoryService;
 
+    @Autowired
     private TaskService taskService;
 
-    @Autowired
-    public UserStoryServiceTest(UserStoryService userStoryService, TaskService taskService) {
-        this.userStoryService = userStoryService;
-        this.taskService = taskService;
-    }
-
-    @Test
-    public void createUserStoryTest(){
-        //given
+    private UserStory buildAndSaveUserStory(){
         UserStory userStory = new UserStory();
         userStory.setTitle(TITLE);
         userStory.setDescription(DESCRIPTION);
@@ -55,8 +48,17 @@ public class UserStoryServiceTest {
         userStory.setStatus(STATUS);
         userStory.setProjectId(PROJECT_ID);
 
+        return userStory;
+    }
+
+    @Test
+    public void createUserStoryTest(){
+        //given
+
+        buildAndSaveUserStory();
+
         //when
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         //then
         Assert.assertNotNull("There should have been one userStory saved in the database.", savedUserStory);
@@ -72,16 +74,8 @@ public class UserStoryServiceTest {
     @Test
     public void getUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -112,16 +106,8 @@ public class UserStoryServiceTest {
     @Test
     public void deleteUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Task task = new Task();
         task.setUserStoryId(savedUserStory.getId());
@@ -143,16 +129,8 @@ public class UserStoryServiceTest {
     @Test
     public void updateUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         //when
         savedUserStory.setTitle(NEW_TITLE);
