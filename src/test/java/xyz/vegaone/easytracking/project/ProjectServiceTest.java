@@ -20,21 +20,11 @@ public class ProjectServiceTest {
     @Autowired
     private ProjectService projectService;
 
-    private Project createNewProject(){
-
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
-
-        return project;
-    }
-
     @Test
     public void createProjectTest(){
         //given
 
         //when
-
         Project savedProject = projectService.createProject(createNewProject());
 
         //then
@@ -63,11 +53,11 @@ public class ProjectServiceTest {
     @Test
     public void deleteTask(){
         //given
-
         Project savedProject = projectService.createProject(createNewProject());
 
         //when
         projectService.deleteProject(savedProject.getId());
+
         //then
         Assert.assertNull("Project should have been deleted from db", projectService.getProject(savedProject.getId()));
 
@@ -76,15 +66,23 @@ public class ProjectServiceTest {
     @Test
     public void updateProjectServiceTest(){
         //given
-
         Project savedProject = projectService.createProject(createNewProject());
-        //when
 
+        //when
         savedProject.setName(PROJECT_NEW_NAME);
         Project updatedProject = projectService.updateProject(savedProject);
+
         //then
         Assert.assertNotNull("There should have been one task in the database", updatedProject);
         Assert.assertEquals("The task title should have matched", PROJECT_NEW_NAME, updatedProject.getName());
+    }
+    private Project createNewProject(){
+
+        Project project = new Project();
+        project.setDescription(PROJECT_DESCRIPTION);
+        project.setName(PROJECT_NAME);
+
+        return project;
     }
 
 }

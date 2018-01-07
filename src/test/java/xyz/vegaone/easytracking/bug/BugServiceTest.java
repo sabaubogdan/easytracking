@@ -21,7 +21,6 @@ public class BugServiceTest {
     public static final Integer USERSTORY_PRIORITY = 1;
     public static final Long USERSTORY_PROJECT_ID = 1L;
     public static final String USERSTORY_STATUS = "Temporary status";
-    private static final String USER_STORY_STATUS = "User story status";
 
     public static final String BUG_DESCRIPTION = "Bug description";
     public static final String BUG_OWNER = "Bug owner";
@@ -37,35 +36,14 @@ public class BugServiceTest {
     @Autowired
     private BugService bugService;
 
-    private UserStory buildAndSaveUserStory(){
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setStatus(USERSTORY_STATUS);
-        userStory.setProjectId(USERSTORY_PROJECT_ID);
-
-        return userStory;
-    }
-
     @Test
     public void createBugTest(){
         //given
 
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
-
-        Bug bug = new Bug();
-        bug.setUserStoryId(savedUserStory.getId());
-        bug.setDescription(BUG_DESCRIPTION);
-        bug.setOwner(BUG_OWNER);
-        bug.setPriority(BUG_PRIORITY);
-        bug.setStatus(BUG_STATUS);
-        bug.setTitle(BUG_TITLE);
+        UserStory savedUserStory = buildAndSaveUserStory();
 
         //when
-        Bug savedBug = bugService.createBug(bug);
+        Bug savedBug = buildAndSaveBug(savedUserStory.getId());
 
         //then
         Assert.assertNotNull("There should have been one bug saved in the database", savedBug);
@@ -82,17 +60,10 @@ public class BugServiceTest {
     public void getBugTest(){
         //given
 
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
+        UserStory savedUserStory = buildAndSaveUserStory();
 
-        Bug bug = new Bug();
-        bug.setUserStoryId(savedUserStory.getId());
-        bug.setDescription(BUG_DESCRIPTION);
-        bug.setOwner(BUG_OWNER);
-        bug.setPriority(BUG_PRIORITY);
-        bug.setStatus(BUG_STATUS);
-        bug.setTitle(BUG_TITLE);
 
-        Bug savedBug = bugService.createBug(bug);
+        Bug savedBug = buildAndSaveBug(savedUserStory.getId());
 
         //when
 
@@ -112,17 +83,9 @@ public class BugServiceTest {
     public void deleteBugTest(){
         //given
 
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
+        UserStory savedUserStory = buildAndSaveUserStory();
 
-        Bug bug = new Bug();
-        bug.setUserStoryId(savedUserStory.getId());
-        bug.setDescription(BUG_DESCRIPTION);
-        bug.setOwner(BUG_OWNER);
-        bug.setPriority(BUG_PRIORITY);
-        bug.setStatus(BUG_STATUS);
-        bug.setTitle(BUG_TITLE);
-
-        Bug savedBug = bugService.createBug(bug);
+        Bug savedBug = buildAndSaveBug(savedUserStory.getId());
 
         //when
         bugService.deleteBug(savedBug.getId());
@@ -136,17 +99,9 @@ public class BugServiceTest {
     public void updateBugService(){
         //given
 
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
+        UserStory savedUserStory = buildAndSaveUserStory();
 
-        Bug bug = new Bug();
-        bug.setUserStoryId(savedUserStory.getId());
-        bug.setDescription(BUG_DESCRIPTION);
-        bug.setOwner(BUG_OWNER);
-        bug.setPriority(BUG_PRIORITY);
-        bug.setStatus(BUG_STATUS);
-        bug.setTitle(BUG_TITLE);
-
-        Bug savedBug = bugService.createBug(bug);
+        Bug savedBug = buildAndSaveBug(savedUserStory.getId());
 
         //when
         savedBug.setTitle(NEWBUG_TITLE);
@@ -155,6 +110,37 @@ public class BugServiceTest {
         //then
         Assert.assertNotNull("There should have been one task in the database", updatedBug);
         Assert.assertEquals("The task title should have matched", NEWBUG_TITLE, updatedBug.getTitle());
+
+    }
+
+    private UserStory buildAndSaveUserStory(){
+        UserStory userStory = new UserStory();
+        userStory.setTitle(USERSTORY_TITLE);
+        userStory.setDescription(USERSTORY_DESCRIPTION);
+        userStory.setOwner(USERSTORY_OWNER);
+        userStory.setEstimation(USERSTORY_ESTIMATION);
+        userStory.setPriority(USERSTORY_PRIORITY);
+        userStory.setStatus(USERSTORY_STATUS);
+        userStory.setProjectId(USERSTORY_PROJECT_ID);
+
+        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+
+        return savedUserStory;
+    }
+
+    private Bug buildAndSaveBug(Long userStoryId){
+
+        Bug bug = new Bug();
+        bug.setUserStoryId(userStoryId);
+        bug.setDescription(BUG_DESCRIPTION);
+        bug.setOwner(BUG_OWNER);
+        bug.setPriority(BUG_PRIORITY);
+        bug.setStatus(BUG_STATUS);
+        bug.setTitle(BUG_TITLE);
+
+        Bug savedBug = bugService.createBug(bug);
+
+        return savedBug;
 
     }
 }
