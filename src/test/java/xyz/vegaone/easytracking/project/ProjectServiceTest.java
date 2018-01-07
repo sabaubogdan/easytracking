@@ -20,16 +20,22 @@ public class ProjectServiceTest {
     @Autowired
     private ProjectService projectService;
 
-    @Test
-    public void createProjectTest(){
-        //given
+    private Project createNewProject(){
 
         Project project = new Project();
         project.setDescription(PROJECT_DESCRIPTION);
         project.setName(PROJECT_NAME);
+
+        return project;
+    }
+
+    @Test
+    public void createProjectTest(){
+        //given
+
         //when
 
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //then
         Assert.assertNotNull("There should have been one project saved in the database", savedProject);
@@ -42,11 +48,7 @@ public class ProjectServiceTest {
     public void getProject(){
         //given
 
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
-
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //when
         Project findProject = projectService.getProject(savedProject.getId());
@@ -61,11 +63,8 @@ public class ProjectServiceTest {
     @Test
     public void deleteTask(){
         //given
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
 
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //when
         projectService.deleteProject(savedProject.getId());
@@ -77,11 +76,8 @@ public class ProjectServiceTest {
     @Test
     public void updateProjectServiceTest(){
         //given
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
 
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
         //when
 
         savedProject.setName(PROJECT_NEW_NAME);

@@ -51,7 +51,7 @@ public class UserStoryService {
     }
 
     public void deleteAllByProjectId(Long id) {
-        //delete tasks asociated with the user stories first
+        taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteAllByProjectId(id);
     }
 

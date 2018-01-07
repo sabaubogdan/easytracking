@@ -19,6 +19,8 @@ public class BugServiceTest {
     public static final String USERSTORY_OWNER = "Test OWNER";
     public static final Integer USERSTORY_ESTIMATION = 123456;
     public static final Integer USERSTORY_PRIORITY = 1;
+    public static final Long USERSTORY_PROJECT_ID = 1L;
+    public static final String USERSTORY_STATUS = "Temporary status";
     private static final String USER_STORY_STATUS = "User story status";
 
     public static final String BUG_DESCRIPTION = "Bug description";
@@ -29,27 +31,30 @@ public class BugServiceTest {
 
     public static final String NEWBUG_TITLE="New bug title";
 
-    public static final Long PROJECT_ID = 1L;
-
     @Autowired
     private UserStoryService userStoryService;
 
     @Autowired
     private BugService bugService;
 
+    private UserStory buildAndSaveUserStory(){
+        UserStory userStory = new UserStory();
+        userStory.setTitle(USERSTORY_TITLE);
+        userStory.setDescription(USERSTORY_DESCRIPTION);
+        userStory.setOwner(USERSTORY_OWNER);
+        userStory.setEstimation(USERSTORY_ESTIMATION);
+        userStory.setPriority(USERSTORY_PRIORITY);
+        userStory.setStatus(USERSTORY_STATUS);
+        userStory.setProjectId(USERSTORY_PROJECT_ID);
+
+        return userStory;
+    }
+
     @Test
     public void createBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(USER_STORY_STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStoryId(savedUserStory.getId());
@@ -58,7 +63,6 @@ public class BugServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
-        bug.setUserStoryId(savedUserStory.getId());
 
         //when
         Bug savedBug = bugService.createBug(bug);
@@ -77,16 +81,8 @@ public class BugServiceTest {
     @Test
     public void getBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(USER_STORY_STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStoryId(savedUserStory.getId());
@@ -95,7 +91,6 @@ public class BugServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
-        bug.setUserStoryId(savedUserStory.getId());
 
         Bug savedBug = bugService.createBug(bug);
 
@@ -116,16 +111,8 @@ public class BugServiceTest {
     @Test
     public void deleteBugTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(USER_STORY_STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStoryId(savedUserStory.getId());
@@ -134,7 +121,6 @@ public class BugServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
-        bug.setUserStoryId(savedUserStory.getId());
 
         Bug savedBug = bugService.createBug(bug);
 
@@ -149,16 +135,8 @@ public class BugServiceTest {
     @Test
     public void updateBugService(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(USERSTORY_TITLE);
-        userStory.setPriority(USERSTORY_PRIORITY);
-        userStory.setEstimation(USERSTORY_ESTIMATION);
-        userStory.setDescription(USERSTORY_DESCRIPTION);
-        userStory.setOwner(USERSTORY_OWNER);
-        userStory.setProjectId(PROJECT_ID);
-        userStory.setStatus(USER_STORY_STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
         Bug bug = new Bug();
         bug.setUserStoryId(savedUserStory.getId());
@@ -167,7 +145,6 @@ public class BugServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
-        bug.setUserStoryId(savedUserStory.getId());
 
         Bug savedBug = bugService.createBug(bug);
 
