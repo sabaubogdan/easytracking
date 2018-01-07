@@ -192,3 +192,27 @@
                    type: bigint
                    constraints:
                      nullable: false
+   - changeSet:
+       id: 7
+       author: Bogdan
+       changes:
+         - dropNotNullConstraint:
+             tableName: tag
+             columnName: user_story_id
+             columnDataType: bigint
+   - changeSet:
+       id: 8
+       author: Bogdan
+       changes:
+         - dropNotNullConstraint:
+             tableName: tag
+             columnName: task_id
+             columnDataType: bigint
+   - changeSet:
+       id: 9
+       author: Bogdan
+       changes:
+         - dropNotNullConstraint:
+             tableName: tag
+             columnName: bug_id
+             columnDataType: bigint
