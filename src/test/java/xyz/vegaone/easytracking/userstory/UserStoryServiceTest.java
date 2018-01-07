@@ -1,7 +1,5 @@
 package xyz.vegaone.easytracking.userstory;
 
-
-import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,17 +47,32 @@ public class UserStoryServiceTest {
         userStory.setStatus(STATUS);
         userStory.setProjectId(PROJECT_ID);
 
-        return userStory;
+        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+
+        return savedUserStory;
+    }
+
+    private Task buildAndSaveTask(Long userStoryId){
+        Task task = new Task();
+        task.setUserStoryId(userStoryId);
+        task.setDescription(TASK_DESCRIPTION);
+        task.setOwner(TASK_OWNER);
+        task.setPriority(TASK_PRIORITY);
+        task.setStatus(TASK_STATUS);
+        task.setTitle(TASK_TITLE);
+
+        Task savedTask = taskService.createTask(task);
+
+        return savedTask;
+
     }
 
     @Test
     public void createUserStoryTest(){
         //given
 
-        buildAndSaveUserStory();
-
         //when
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
+        UserStory savedUserStory = buildAndSaveUserStory();
 
         //then
         Assert.assertNotNull("There should have been one userStory saved in the database.", savedUserStory);
@@ -75,18 +88,9 @@ public class UserStoryServiceTest {
     @Test
     public void getUserStoryTest(){
         //given
-
         UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
-        Task task = new Task();
-        task.setUserStoryId(savedUserStory.getId());
-        task.setDescription(TASK_DESCRIPTION);
-        task.setOwner(TASK_OWNER);
-        task.setPriority(TASK_PRIORITY);
-        task.setStatus(TASK_STATUS);
-        task.setTitle(TASK_TITLE);
-
-        Task savedTask = taskService.createTask(task);
+        Task savedTask = buildAndSaveTask(savedUserStory.getId());
 
         //when
         UserStory findResult = userStoryService.getUserStory(savedUserStory.getId());
@@ -107,18 +111,9 @@ public class UserStoryServiceTest {
     @Test
     public void deleteUserStoryTest(){
         //given
+        UserStory savedUserStory = buildAndSaveUserStory();
 
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
-
-        Task task = new Task();
-        task.setUserStoryId(savedUserStory.getId());
-        task.setDescription(TASK_DESCRIPTION);
-        task.setOwner(TASK_OWNER);
-        task.setPriority(TASK_PRIORITY);
-        task.setStatus(TASK_STATUS);
-        task.setTitle(TASK_TITLE);
-
-        Task savedTask = taskService.createTask(task);
+        Task savedTask = buildAndSaveTask(savedUserStory.getId());
 
         //when
         userStoryService.deleteUserStory(savedUserStory.getId());
@@ -130,8 +125,7 @@ public class UserStoryServiceTest {
     @Test
     public void updateUserStoryTest(){
         //given
-
-        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
+        UserStory savedUserStory = buildAndSaveUserStory();
 
         //when
         savedUserStory.setTitle(NEW_TITLE);
