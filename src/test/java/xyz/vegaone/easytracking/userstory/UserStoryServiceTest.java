@@ -37,35 +37,7 @@ public class UserStoryServiceTest {
     @Autowired
     private TaskService taskService;
 
-    private UserStory buildAndSaveUserStory(){
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
-
-        return savedUserStory;
-    }
-
-    private Task buildAndSaveTask(Long userStoryId){
-        Task task = new Task();
-        task.setUserStoryId(userStoryId);
-        task.setDescription(TASK_DESCRIPTION);
-        task.setOwner(TASK_OWNER);
-        task.setPriority(TASK_PRIORITY);
-        task.setStatus(TASK_STATUS);
-        task.setTitle(TASK_TITLE);
-
-        Task savedTask = taskService.createTask(task);
-
-        return savedTask;
-
-    }
 
     @Test
     public void createUserStoryTest(){
@@ -134,6 +106,36 @@ public class UserStoryServiceTest {
         //then
         Assert.assertNotNull("There should have been one userStory updated in the database.", updatedUserStory);
         Assert.assertEquals("The userStory title should have matched", NEW_TITLE, updatedUserStory.getTitle());
+
+    }
+
+    private UserStory buildAndSaveUserStory(){
+        UserStory userStory = new UserStory();
+        userStory.setTitle(TITLE);
+        userStory.setDescription(DESCRIPTION);
+        userStory.setOwner(OWNER);
+        userStory.setEstimation(ESTIMATION);
+        userStory.setPriority(PRIORITY);
+        userStory.setStatus(STATUS);
+        userStory.setProjectId(PROJECT_ID);
+
+        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+
+        return savedUserStory;
+    }
+
+    private Task buildAndSaveTask(Long userStoryId){
+        Task task = new Task();
+        task.setUserStoryId(userStoryId);
+        task.setDescription(TASK_DESCRIPTION);
+        task.setOwner(TASK_OWNER);
+        task.setPriority(TASK_PRIORITY);
+        task.setStatus(TASK_STATUS);
+        task.setTitle(TASK_TITLE);
+
+        Task savedTask = taskService.createTask(task);
+
+        return savedTask;
 
     }
 }
