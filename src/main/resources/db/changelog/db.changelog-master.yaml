@@ -198,18 +198,21 @@
        changes:
          - dropNotNullConstraint:
              tableName: tag
-             columns name: user_story_id
+             columnName: user_story_id
+             columnDataType: bigint
    - changeSet:
        id: 8
        author: Bogdan
        changes:
          - dropNotNullConstraint:
              tableName: tag
-             columns name: task_id
+             columnName: task_id
+             columnDataType: bigint
    - changeSet:
        id: 9
        author: Bogdan
        changes:
          - dropNotNullConstraint:
              tableName: tag
-             columns name: bug_id
+             columnName: bug_id
+             columnDataType: bigint
