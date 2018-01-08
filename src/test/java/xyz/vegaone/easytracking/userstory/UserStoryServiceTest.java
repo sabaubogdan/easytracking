@@ -1,7 +1,5 @@
 package xyz.vegaone.easytracking.userstory;
 
-
-import net.bytebuddy.asm.Advice;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,20 +37,14 @@ public class UserStoryServiceTest {
     @Autowired
     private TaskService taskService;
 
+
+
     @Test
     public void createUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
 
         //when
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
+        UserStory savedUserStory = buildAndSaveUserStory();
 
         //then
         Assert.assertNotNull("There should have been one userStory saved in the database.", savedUserStory);
@@ -68,26 +60,9 @@ public class UserStoryServiceTest {
     @Test
     public void getUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
+        UserStory savedUserStory = userStoryService.createUserStory(buildAndSaveUserStory());
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
-
-        Task task = new Task();
-        task.setUserStoryId(savedUserStory.getId());
-        task.setDescription(TASK_DESCRIPTION);
-        task.setOwner(TASK_OWNER);
-        task.setPriority(TASK_PRIORITY);
-        task.setStatus(TASK_STATUS);
-        task.setTitle(TASK_TITLE);
-
-        Task savedTask = taskService.createTask(task);
+        Task savedTask = buildAndSaveTask(savedUserStory.getId());
 
         //when
         UserStory findResult = userStoryService.getUserStory(savedUserStory.getId());
@@ -108,26 +83,9 @@ public class UserStoryServiceTest {
     @Test
     public void deleteUserStoryTest(){
         //given
-        UserStory userStory = new UserStory();
-        userStory.setTitle(TITLE);
-        userStory.setDescription(DESCRIPTION);
-        userStory.setOwner(OWNER);
-        userStory.setEstimation(ESTIMATION);
-        userStory.setPriority(PRIORITY);
-        userStory.setStatus(STATUS);
-        userStory.setProjectId(PROJECT_ID);
+        UserStory savedUserStory = buildAndSaveUserStory();
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
-
-        Task task = new Task();
-        task.setUserStoryId(savedUserStory.getId());
-        task.setDescription(TASK_DESCRIPTION);
-        task.setOwner(TASK_OWNER);
-        task.setPriority(TASK_PRIORITY);
-        task.setStatus(TASK_STATUS);
-        task.setTitle(TASK_TITLE);
-
-        Task savedTask = taskService.createTask(task);
+        Task savedTask = buildAndSaveTask(savedUserStory.getId());
 
         //when
         userStoryService.deleteUserStory(savedUserStory.getId());
@@ -139,6 +97,19 @@ public class UserStoryServiceTest {
     @Test
     public void updateUserStoryTest(){
         //given
+        UserStory savedUserStory = buildAndSaveUserStory();
+
+        //when
+        savedUserStory.setTitle(NEW_TITLE);
+        UserStory updatedUserStory = userStoryService.updateUserStory(savedUserStory);
+
+        //then
+        Assert.assertNotNull("There should have been one userStory updated in the database.", updatedUserStory);
+        Assert.assertEquals("The userStory title should have matched", NEW_TITLE, updatedUserStory.getTitle());
+
+    }
+
+    private UserStory buildAndSaveUserStory(){
         UserStory userStory = new UserStory();
         userStory.setTitle(TITLE);
         userStory.setDescription(DESCRIPTION);
@@ -150,13 +121,21 @@ public class UserStoryServiceTest {
 
         UserStory savedUserStory = userStoryService.createUserStory(userStory);
 
-        //when
-        savedUserStory.setTitle(NEW_TITLE);
-        UserStory updatedUserStory = userStoryService.updateUserStory(savedUserStory);
+        return savedUserStory;
+    }
 
-        //then
-        Assert.assertNotNull("There should have been one userStory updated in the database.", updatedUserStory);
-        Assert.assertEquals("The userStory title should have matched", NEW_TITLE, updatedUserStory.getTitle());
+    private Task buildAndSaveTask(Long userStoryId){
+        Task task = new Task();
+        task.setUserStoryId(userStoryId);
+        task.setDescription(TASK_DESCRIPTION);
+        task.setOwner(TASK_OWNER);
+        task.setPriority(TASK_PRIORITY);
+        task.setStatus(TASK_STATUS);
+        task.setTitle(TASK_TITLE);
+
+        Task savedTask = taskService.createTask(task);
+
+        return savedTask;
 
     }
 }
