@@ -216,3 +216,23 @@
              tableName: tag
              columnName: bug_id
              columnDataType: bigint
+   - changeSet:
+        id: 10
+        author: Bogdan
+        changes:
+          - addColumn:
+             tableName: task
+             columns:
+               - column:
+                   name: estimation
+                   type: bigint
+   - changeSet:
+        id: 11
+        author: Bogdan
+        changes:
+          - addColumn:
+             tableName: bug
+             columns:
+               - column:
+                   name: estimation
+                   type: bigint

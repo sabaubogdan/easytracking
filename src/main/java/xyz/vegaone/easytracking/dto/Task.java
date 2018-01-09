@@ -16,6 +16,16 @@ public class Task {
 
     private Long userStoryId;
 
+    private Long estimation;
+
+    public Long getEstimation() {
+        return estimation;
+    }
+
+    public void setEstimation(Long estimation) {
+        this.estimation = estimation;
+    }
+
     public Long getUserStoryId() {
         return userStoryId;
     }
