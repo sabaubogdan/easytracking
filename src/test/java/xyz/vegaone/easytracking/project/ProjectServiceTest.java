@@ -24,12 +24,8 @@ public class ProjectServiceTest {
     public void createProjectTest(){
         //given
 
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
         //when
-
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //then
         Assert.assertNotNull("There should have been one project saved in the database", savedProject);
@@ -42,11 +38,7 @@ public class ProjectServiceTest {
     public void getProject(){
         //given
 
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
-
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //when
         Project findProject = projectService.getProject(savedProject.getId());
@@ -61,14 +53,11 @@ public class ProjectServiceTest {
     @Test
     public void deleteTask(){
         //given
-        Project project = new Project();
-        project.setDescription(PROJECT_DESCRIPTION);
-        project.setName(PROJECT_NAME);
-
-        Project savedProject = projectService.createProject(project);
+        Project savedProject = projectService.createProject(createNewProject());
 
         //when
         projectService.deleteProject(savedProject.getId());
+
         //then
         Assert.assertNull("Project should have been deleted from db", projectService.getProject(savedProject.getId()));
 
@@ -77,18 +66,23 @@ public class ProjectServiceTest {
     @Test
     public void updateProjectServiceTest(){
         //given
+        Project savedProject = projectService.createProject(createNewProject());
+
+        //when
+        savedProject.setName(PROJECT_NEW_NAME);
+        Project updatedProject = projectService.updateProject(savedProject);
+
+        //then
+        Assert.assertNotNull("There should have been one task in the database", updatedProject);
+        Assert.assertEquals("The task title should have matched", PROJECT_NEW_NAME, updatedProject.getName());
+    }
+    private Project createNewProject(){
+
         Project project = new Project();
         project.setDescription(PROJECT_DESCRIPTION);
         project.setName(PROJECT_NAME);
 
-        Project savedProject = projectService.createProject(project);
-        //when
-
-        savedProject.setName(PROJECT_NEW_NAME);
-        Project updatedProject = projectService.updateProject(savedProject);
-        //then
-        Assert.assertNotNull("There should have been one task in the database", updatedProject);
-        Assert.assertEquals("The task title should have matched", PROJECT_NEW_NAME, updatedProject.getName());
+        return project;
     }
 
 }
