@@ -88,20 +88,20 @@ public class TagServiceTest {
         tagService.deleteTag(savedTag.getId());
 
         //then
-        Assert.assertNull("Task should have been deleted from db", tagService.getTag(savedTag.getId()));
+        Assert.assertNull("Tag should have been deleted from db", tagService.getTag(savedTag.getId()));
     }
 
     @Test
     public void updateTagTest() {
         //given
-        Tag savedTag = tagService.createTag(buildAndSaveTag());
+        Tag savedTag = buildAndSaveTag();
 
         //when
         savedTag.setName(TAG_NEWNAME);
 
         //then
         Assert.assertNotNull("There should have been one tag in the database", savedTag);
-        Assert.assertEquals("The task title should have matched", TAG_NEWNAME, savedTag.getName());
+        Assert.assertEquals("The tag title should have matched", TAG_NEWNAME, savedTag.getName());
     }
 
     private UserStory buildAndSaveUserStory() {
