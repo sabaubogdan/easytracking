@@ -17,7 +17,6 @@ public class ProjectController {
     private ProjectService projectService;
 
     @GetMapping(value = "/{id}")
-    @ResponseStatus(HttpStatus.OK)
     public Project getProject(@PathVariable(value = "id") Long id) {
         Project project = projectService.getProject(id);
 
