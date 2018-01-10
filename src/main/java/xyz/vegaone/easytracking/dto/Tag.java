@@ -1,7 +1,5 @@
 package xyz.vegaone.easytracking.dto;
 
-import sun.reflect.generics.reflectiveObjects.LazyReflectiveObjectGenerator;
-
 public class Tag {
 
     private Long id;
@@ -13,6 +11,17 @@ public class Tag {
     private Long taskId;
 
     private Long bugId;
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userStoryId=" + userStoryId +
+                ", taskId=" + taskId +
+                ", bugId=" + bugId +
+                '}';
+    }
 
     public Long getId() {
         return id;

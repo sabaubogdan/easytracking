@@ -55,16 +55,12 @@ public class TagServiceTest {
     private TagService tagService;
 
     @Test
-    public void createTagTest(){
+    public void createTagTest() {
         //given
-        Tag tag = new Tag();
-        tag.setBugId(buildAndSaveBug().getId());
-        tag.setTaskId(buildAndSaveTask().getId());
-        tag.setUserStoryId(buildAndSaveUserStory().getId());
-        tag.setName(TAG_NAME);
 
         //when
-        Tag savedTag = tagService.createTag(tag);
+        Tag savedTag = tagService.createTag(buildAndSaveTag());
+
         //then
 
         Assert.assertNotNull("There should have been one tag saved in the database", savedTag);
@@ -72,14 +68,9 @@ public class TagServiceTest {
     }
 
     @Test
-    public void getTagTest(){
+    public void getTagTest() {
         //given
-        Tag tag = new Tag();
-        tag.setBugId(buildAndSaveBug().getId());
-        tag.setTaskId(buildAndSaveTask().getId());
-        tag.setUserStoryId(buildAndSaveUserStory().getId());
-        tag.setName(TAG_NAME);
-        Tag savedTag = tagService.createTag(tag);
+        Tag savedTag = tagService.createTag(buildAndSaveTag());
 
         //when
         Tag findTag = tagService.getTag(savedTag.getId());
@@ -89,14 +80,9 @@ public class TagServiceTest {
     }
 
     @Test
-    public void deleteTag(){
+    public void deleteTag() {
         //given
-        Tag tag = new Tag();
-        tag.setBugId(buildAndSaveBug().getId());
-        tag.setTaskId(buildAndSaveTask().getId());
-        tag.setUserStoryId(buildAndSaveUserStory().getId());
-        tag.setName(TAG_NAME);
-        Tag savedTag = tagService.createTag(tag);
+        Tag savedTag = tagService.createTag(buildAndSaveTag());
 
         //when
         tagService.deleteTag(savedTag.getId());
@@ -106,24 +92,19 @@ public class TagServiceTest {
     }
 
     @Test
-    public void updateTagTest(){
+    public void updateTagTest() {
         //given
-        Tag tag = new Tag();
-        tag.setBugId(buildAndSaveBug().getId());
-        tag.setTaskId(buildAndSaveTask().getId());
-        tag.setUserStoryId(buildAndSaveUserStory().getId());
-        tag.setName(TAG_NAME);
-        Tag savedTag = tagService.createTag(tag);
+        Tag savedTag = tagService.createTag(buildAndSaveTag());
 
         //when
-        tag.setName(TAG_NEWNAME);
+        savedTag.setName(TAG_NEWNAME);
 
         //then
         Assert.assertNotNull("There should have been one tag in the database", savedTag);
         Assert.assertEquals("The task title should have matched", TAG_NEWNAME, savedTag.getName());
     }
 
-    private UserStory buildAndSaveUserStory(){
+    private UserStory buildAndSaveUserStory() {
         UserStory userStory = new UserStory();
         userStory.setTitle(TITLE);
         userStory.setDescription(DESCRIPTION);
@@ -138,7 +119,7 @@ public class TagServiceTest {
         return savedUserStory;
     }
 
-    private Bug buildAndSaveBug(){
+    private Bug buildAndSaveBug() {
         Bug bug = new Bug();
         bug.setUserStoryId(buildAndSaveUserStory().getId());
         bug.setDescription(BUG_DESCRIPTION);
@@ -153,7 +134,8 @@ public class TagServiceTest {
 
         return savedBug;
     }
-    private Task buildAndSaveTask(){
+
+    private Task buildAndSaveTask() {
         Task task = new Task();
         task.setUserStoryId(buildAndSaveUserStory().getId());
         task.setDescription(TASK_DESCRIPTION);
@@ -166,4 +148,18 @@ public class TagServiceTest {
 
         return savedTask;
     }
+
+    private Tag buildAndSaveTag() {
+        Tag tag = new Tag();
+        tag.setBugId(buildAndSaveBug().getId());
+        tag.setTaskId(buildAndSaveTask().getId());
+        tag.setUserStoryId(buildAndSaveUserStory().getId());
+        tag.setName(TAG_NAME);
+
+        //when
+        Tag savedTag = tagService.createTag(tag);
+
+        return savedTag;
+    }
+
 }
