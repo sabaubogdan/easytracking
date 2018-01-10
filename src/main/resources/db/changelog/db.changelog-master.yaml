@@ -236,3 +236,32 @@
                - column:
                    name: estimation
                    type: bigint
+   - changeSet:
+       id: 12
+       author: Bogdan
+       changes:
+         - createTable:
+             tableName: sprint
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: start_date
+                   type: date
+                   constraints:
+                     nullable: false
+               - column:
+                   name: end_date
+                   type: date
+                   constraints:
+                     nullable: false
+               - column:
+                   name: sprint_number
+                   type: integer
+                   constraints:
+                     nullable: false
