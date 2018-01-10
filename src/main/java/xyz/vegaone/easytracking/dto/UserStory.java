@@ -24,6 +24,16 @@ public class UserStory {
 
     private List<Bug> bugList;
 
+    private Long sprintId;
+
+    public Long getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Long sprintId) {
+        this.sprintId = sprintId;
+    }
+
     public List<Task> getTaskList() {
         return taskList;
     }

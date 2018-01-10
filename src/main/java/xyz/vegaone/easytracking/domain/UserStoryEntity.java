@@ -32,6 +32,17 @@ public class UserStoryEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "sprint_id")
+    private Long sprintId;
+
+    public Long getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Long sprintId) {
+        this.sprintId = sprintId;
+    }
+
     public String getStatus() {
         return status;
     }

@@ -265,3 +265,13 @@
                    type: integer
                    constraints:
                      nullable: false
+   - changeSet:
+        id: 13
+        author: Bogdan
+        changes:
+          - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: sprint_id
+                   type: bigint
