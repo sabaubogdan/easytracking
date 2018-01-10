@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.controller;
 
+import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import xyz.vegaone.easytracking.service.ProjectService;
 @RestController
 @RequestMapping(value = "api/project")
 @Slf4j
+@Log4j
 public class ProjectController {
 
     @Autowired
