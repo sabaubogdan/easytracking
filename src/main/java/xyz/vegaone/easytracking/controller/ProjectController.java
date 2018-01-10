@@ -13,8 +13,13 @@ import xyz.vegaone.easytracking.service.ProjectService;
 @Slf4j
 public class ProjectController {
 
-    @Autowired
+
     private ProjectService projectService;
+
+    @Autowired
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping(value = "/{id}")
     public Project getProject(@PathVariable(value = "id") Long id) {

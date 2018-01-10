@@ -12,8 +12,13 @@ import xyz.vegaone.easytracking.service.BugService;
 @Slf4j
 public class BugController {
 
-    @Autowired
+
     private BugService bugService;
+
+    @Autowired
+    public BugController(BugService bugService) {
+        this.bugService = bugService;
+    }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
