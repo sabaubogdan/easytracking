@@ -12,8 +12,13 @@ import xyz.vegaone.easytracking.service.TaskService;
 @Slf4j
 public class TaskController {
 
-    @Autowired
+
     private TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)

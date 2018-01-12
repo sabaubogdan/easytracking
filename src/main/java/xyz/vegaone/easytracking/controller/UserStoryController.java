@@ -14,8 +14,13 @@ import java.util.List;
 @Slf4j
 public class UserStoryController {
 
-    @Autowired
+
     private UserStoryService userStoryService;
+
+    @Autowired
+    public UserStoryController(UserStoryService userStoryService) {
+        this.userStoryService = userStoryService;
+    }
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
