@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.SprintEntity;
 import xyz.vegaone.easytracking.dto.Sprint;
 import xyz.vegaone.easytracking.mapper.SprintMapper;
-import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.SprintRepo;
-import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -21,22 +19,16 @@ public class SprintService {
 
     private UserStoryService userStoryService;
 
-    private UserStoryRepo userStoryRepo;
-
-    private UserStoryMapper userStoryMapper;
 
     @Autowired
-    public SprintService(SprintRepo sprintRepo, SprintMapper sprintMapper, UserStoryService userStoryService, UserStoryRepo userStoryRepo, UserStoryMapper userStoryMapper) {
+    public SprintService(SprintRepo sprintRepo, SprintMapper sprintMapper, UserStoryService userStoryService) {
         this.sprintRepo = sprintRepo;
         this.sprintMapper = sprintMapper;
         this.userStoryService = userStoryService;
-        this.userStoryRepo = userStoryRepo;
-        this.userStoryMapper = userStoryMapper;
     }
 
 
-
-    public Sprint createSprint(Sprint sprint){
+    public Sprint createSprint(Sprint sprint) {
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
         Sprint savedSprint = sprintMapper.domainToDto(savedSprintEntity);
@@ -45,19 +37,19 @@ public class SprintService {
 
         savedSprint.setUserStoryList(Collections.emptyList());
 
-       return savedSprint;
+        return savedSprint;
     }
 
-    public Sprint getSprint(Long id){
+    public Sprint getSprint(Long id) {
         Optional<SprintEntity> getResultOptional = sprintRepo.findById(id);
         SprintEntity sprintEntity = null;
 
         if (getResultOptional.isPresent()) {
             sprintEntity = getResultOptional.get();
         }
-            Sprint sprint = sprintMapper.domainToDto(sprintEntity);
+        Sprint sprint = sprintMapper.domainToDto(sprintEntity);
 
-        if (sprint != null){
+        if (sprint != null) {
             sprint.setUserStoryList(userStoryService.findAllBySprintId(id));
         }
 
@@ -65,11 +57,11 @@ public class SprintService {
 
     }
 
-    public void deleteSprint(Long id){
+    public void deleteSprint(Long id) {
         sprintRepo.deleteById(id);
     }
 
-    public Sprint updateSprint(Sprint sprint){
+    public Sprint updateSprint(Sprint sprint) {
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
 

@@ -266,7 +266,7 @@
                    constraints:
                      nullable: false
    - changeSet:
-        id: 13
+        id: 14
         author: Bogdan
         changes:
           - addColumn:
