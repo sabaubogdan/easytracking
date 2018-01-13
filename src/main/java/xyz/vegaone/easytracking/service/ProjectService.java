@@ -11,6 +11,7 @@ import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.ProjectRepo;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,7 +37,7 @@ public class ProjectService {
         this.userStoryMapper = userStoryMapper;
     }
 
-    public Project createProject(Project project){
+    public Project createProject(Project project) {
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
         ProjectEntity savedProject = projectRepo.save(projectEntity);
 
@@ -46,7 +47,7 @@ public class ProjectService {
         return projectDto;
     }
 
-    public Project getProject(Long id){
+    public Project getProject(Long id) {
 
         Optional<ProjectEntity> projectOptional = projectRepo.findById(id);
 
@@ -70,12 +71,19 @@ public class ProjectService {
 
     }
 
-    public void deleteProject(Long id){
+    public List<Project> getAllProjects() {
+
+        List<ProjectEntity> projectEntityList = projectRepo.findAll();
+
+        return projectMapper.domainToDtoList(projectEntityList);
+    }
+
+    public void deleteProject(Long id) {
         userStoryService.deleteAllByProjectId(id);
         projectRepo.deleteById(id);
     }
 
-    public Project updateProject(Project project){
+    public Project updateProject(Project project) {
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
 
         ProjectEntity savedProjectEntity = projectRepo.save(projectEntity);
