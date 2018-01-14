@@ -13,6 +13,8 @@ public class Sprint {
 
     private Integer sprintNumber;
 
+    private Long projectId;
+
     private List<UserStory> userStoryList;
 
     public List<UserStory> getUserStoryList() {
@@ -53,5 +55,13 @@ public class Sprint {
 
     public void setSprintNumber(Integer sprintNumber) {
         this.sprintNumber = sprintNumber;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

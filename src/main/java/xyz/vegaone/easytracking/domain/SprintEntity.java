@@ -21,6 +21,9 @@ public class SprintEntity {
     @Column (name = "sprint_number")
     private Integer sprintNumber;
 
+    @Column (name = "project_id")
+    private Long projectId;
+
     public Long getId() {
         return id;
     }
@@ -51,5 +54,13 @@ public class SprintEntity {
 
     public void setSprintNumber(Integer sprintNumber) {
         this.sprintNumber = sprintNumber;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 }

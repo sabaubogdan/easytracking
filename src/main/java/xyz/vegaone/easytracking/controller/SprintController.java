@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import xyz.vegaone.easytracking.dto.Sprint;
 import xyz.vegaone.easytracking.service.SprintService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/sprint")
 @Slf4j
@@ -50,5 +52,14 @@ public class SprintController {
     public void deleteSprint(@PathVariable(value = "id") Long id) {
         sprintService.deleteSprint(id);
 
+    }
+
+    @GetMapping(value = "/project/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Sprint> getSprintListByProjectId(@PathVariable(value = "id") Long projectId){
+
+        List<Sprint> sprintList = sprintService.findAllByProjectId(projectId);
+
+        return sprintList;
     }
 }

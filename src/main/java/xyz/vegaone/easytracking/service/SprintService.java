@@ -8,6 +8,7 @@ import xyz.vegaone.easytracking.mapper.SprintMapper;
 import xyz.vegaone.easytracking.repo.SprintRepo;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -68,6 +69,13 @@ public class SprintService {
         Sprint updatedSprint = sprintMapper.domainToDto(savedSprintEntity);
 
         return updatedSprint;
+    }
+
+
+    public List<Sprint> findAllByProjectId(Long projectId) {
+        List<SprintEntity> sprintEntityList = sprintRepo.findAllByProjectId(projectId);
+
+        return sprintMapper.domainToDtoList(sprintEntityList);
     }
 
 }
