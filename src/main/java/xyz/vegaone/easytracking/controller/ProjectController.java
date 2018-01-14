@@ -52,7 +52,7 @@ public class ProjectController {
         projectService.deleteProject(id);
     }
 
-    @GetMapping(value = "/project/all")
+    @GetMapping(value = "/all")
     @ResponseStatus(value = HttpStatus.OK)
     public List<Project> getAllProjects() {
 
