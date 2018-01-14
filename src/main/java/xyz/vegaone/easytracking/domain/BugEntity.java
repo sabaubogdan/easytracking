@@ -34,6 +34,9 @@ public class BugEntity {
     @Column(name = "estimation")
     private Long estimation;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     public Long getEstimation() {
         return estimation;
     }
@@ -96,5 +99,13 @@ public class BugEntity {
 
     public void setUserStoryId(Long userStoryId) {
         this.userStoryId = userStoryId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -19,8 +19,7 @@ public class BugService {
     private BugMapper bugMapper;
 
     @Autowired
-    public BugService(BugRepo bugRepo,
-                      BugMapper bugMapper) {
+    public BugService(BugRepo bugRepo, BugMapper bugMapper) {
         this.bugRepo = bugRepo;
         this.bugMapper = bugMapper;
     }
@@ -66,7 +65,7 @@ public class BugService {
         return bugMapper.domainToDtoList(bugEntityList);
     }
 
-    public void deleteAllByUserStoryId(Long id){
+    public void deleteAllByUserStoryId(Long id) {
         bugRepo.deleteAllByUserStoryId(id);
     }
 }

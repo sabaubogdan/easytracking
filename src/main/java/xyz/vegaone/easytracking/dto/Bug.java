@@ -18,6 +18,8 @@ public class Bug {
 
     private Long estimation;
 
+    private Long userId;
+
     public Long getEstimation() {
         return estimation;
     }
@@ -80,5 +82,13 @@ public class Bug {
 
     public void setUserStoryId(Long userStoryId) {
         this.userStoryId = userStoryId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -32,6 +32,9 @@ public class UserStoryEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     public String getStatus() {
         return status;
     }
@@ -94,5 +97,13 @@ public class UserStoryEntity {
 
     public void setEstimation(Integer estimation) {
         this.estimation = estimation;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
