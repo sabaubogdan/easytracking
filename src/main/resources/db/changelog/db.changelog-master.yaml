@@ -289,3 +289,38 @@
                    type: varchar(50)
                    constraints:
                      nullable: false
+               - column:
+                   name: project_id
+                   type: bigint
+                   constraints:
+                     nullable: false
+   - changeSet:
+       id: 14
+       author: David
+       changes:
+         - addColumn:
+             tableName: bug
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint
+   - changeSet:
+       id: 15
+       author: David
+       changes:
+         - addColumn:
+             tableName: task
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint
+   - changeSet:
+       id: 16
+       author: David
+       changes:
+         - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint

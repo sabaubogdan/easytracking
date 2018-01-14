@@ -1,22 +1,13 @@
-package xyz.vegaone.easytracking.domain;
+package xyz.vegaone.easytracking.dto;
 
-import javax.persistence.*;
+public class User {
 
-@Entity
-@Table(name = "user")
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "project_id")
     private Long projectId;
 
     public Long getId() {
