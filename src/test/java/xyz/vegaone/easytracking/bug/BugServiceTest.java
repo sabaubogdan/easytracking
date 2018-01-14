@@ -27,6 +27,7 @@ public class BugServiceTest {
     public static final Integer BUG_PRIORITY = 1;
     public static final String BUG_STATUS = "Bug status";
     public static final String BUG_TITLE = "Bug title";
+    public static final Long USER_ID = 13L;
 
     public static final String NEWBUG_TITLE="New bug title";
 
@@ -137,6 +138,7 @@ public class BugServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
+        bug.setUserId(USER_ID);
 
         Bug savedBug = bugService.createBug(bug);
 

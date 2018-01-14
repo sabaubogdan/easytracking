@@ -21,6 +21,7 @@ public class TaskServiceTest {
     private static final Integer PRIORITY = 1;
     private static final String STATUS = "Task status";
     private static final String TITLE = "Task title";
+    private static final Long USER_ID = 13L;
 
     public static final String USERSTORY_TITLE = "Test title";
     public static final String USERSTORY_DESCRIPTION = "Test description";
@@ -165,6 +166,7 @@ public class TaskServiceTest {
         task.setPriority(PRIORITY);
         task.setStatus(STATUS);
         task.setTitle(TITLE);
+        task.setUserId(USER_ID);
 
         Task savedTask = taskService.createTask(task);
 

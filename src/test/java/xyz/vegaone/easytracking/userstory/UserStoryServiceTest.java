@@ -22,6 +22,7 @@ public class UserStoryServiceTest {
     public static final Integer PRIORITY = 1;
     public static final Long PROJECT_ID = 1L;
     public static final String STATUS = "Temporary status";
+    public static final Long USER_ID = 13L;
 
     private static final String TASK_DESCRIPTION = "Task description";
     private static final String TASK_OWNER = "Task owner";
@@ -118,6 +119,7 @@ public class UserStoryServiceTest {
         userStory.setPriority(PRIORITY);
         userStory.setStatus(STATUS);
         userStory.setProjectId(PROJECT_ID);
+        userStory.setUserId(USER_ID);
 
         UserStory savedUserStory = userStoryService.createUserStory(userStory);
 
