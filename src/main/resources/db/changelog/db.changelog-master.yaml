@@ -266,6 +266,30 @@
                    constraints:
                      nullable: false
    - changeSet:
+       id: 13
+       author: David
+       changes:
+         - createTable:
+             tableName: user
+             columns:
+               - column:
+                   name: id
+                   type: bigint
+                   autoIncrement: true
+                   constraints:
+                     primaryKey: true
+                     nullable: false
+               - column:
+                   name: name
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+               - column:
+                   name: email
+                   type: varchar(50)
+                   constraints:
+                     nullable: false
+   - changeSet:                     
         id: 14
         author: Bogdan
         changes:
@@ -274,4 +298,4 @@
              columns:
                - column:
                    name: sprint_id
-                   type: bigint
+                   type: bigint                     

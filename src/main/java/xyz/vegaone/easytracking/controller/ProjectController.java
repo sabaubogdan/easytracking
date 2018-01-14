@@ -7,14 +7,21 @@ import org.springframework.web.bind.annotation.*;
 import xyz.vegaone.easytracking.dto.Project;
 import xyz.vegaone.easytracking.service.ProjectService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "api/project")
 @Slf4j
 public class ProjectController {
 
-    @Autowired
+
     private ProjectService projectService;
+
+    @Autowired
+    public ProjectController(ProjectService projectService) {
+        this.projectService = projectService;
+    }
 
     @GetMapping(value = "/{id}")
     public Project getProject(@PathVariable(value = "id") Long id) {
@@ -43,5 +50,12 @@ public class ProjectController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProject(@PathVariable(value = "id") Long id) {
         projectService.deleteProject(id);
+    }
+
+    @GetMapping(value = "/project/all")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Project> getAllProjects() {
+
+        return projectService.getAllProjects();
     }
 }
