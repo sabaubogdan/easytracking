@@ -50,6 +50,15 @@ public class UserStoryService {
         return userStoryList;
     }
 
+    public List<UserStory> findAllBySprintId(Long id) {
+        List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllBySprintId(id);
+
+        List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
+
+        return userStoryList;
+
+    }
+
     public void deleteAllByProjectId(Long id) {
         taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteAllByProjectId(id);

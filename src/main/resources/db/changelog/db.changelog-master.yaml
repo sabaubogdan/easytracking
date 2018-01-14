@@ -289,3 +289,13 @@
                    type: varchar(50)
                    constraints:
                      nullable: false
+   - changeSet:                     
+        id: 14
+        author: Bogdan
+        changes:
+          - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: sprint_id
+                   type: bigint                     
