@@ -113,7 +113,6 @@ public class SprintServiceTest {
         sprint.setStartDate(SPRINT_START_DATE);
         sprint.setSprintNumber(SPRINT_NUMBER);
 
-        //when
         Sprint savedSprint = sprintService.createSprint(sprint);
 
         return savedSprint;
