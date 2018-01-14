@@ -71,7 +71,7 @@ public class UserServiceTest {
         userService.deleteUser(savedUser.getId());
 
         //then
-        Assert.assertNotNull("User should have been deleted from database", userService.getUser(savedUser.getId()));
+        Assert.assertNull("User should have been deleted from database", userService.getUser(savedUser.getId()));
     }
 
     private User createNewUser() {
