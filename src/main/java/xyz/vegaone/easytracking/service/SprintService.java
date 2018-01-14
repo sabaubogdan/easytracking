@@ -33,7 +33,7 @@ public class SprintService {
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
         Sprint savedSprint = sprintMapper.domainToDto(savedSprintEntity);
 
-        Long sprintNumber = savedSprintEntity.getId() + 1;
+//      TODO: figure out a way to generate sprint numbers
 
         savedSprint.setUserStoryList(Collections.emptyList());
 
