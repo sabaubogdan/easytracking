@@ -14,4 +14,6 @@ public interface UserStoryRepo extends JpaRepository<UserStoryEntity, Long> {
 
     List<UserStoryEntity> findAllBySprintId(Long id);
 
+    List<UserStoryEntity> findAllByProjectIdaAndSprintId (Long projectId, Long sprintId);
+
 }

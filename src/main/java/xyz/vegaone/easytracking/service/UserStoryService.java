@@ -113,4 +113,12 @@ public class UserStoryService {
 
         return updatedUserStory;
     }
+
+    public List<UserStory> findAllByProjectIdAndSprintId(Long projectId, Long sprintId){
+        List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectIdaAndSprintId(projectId, sprintId);
+
+        List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
+
+        return userStoryList;
+    }
 }

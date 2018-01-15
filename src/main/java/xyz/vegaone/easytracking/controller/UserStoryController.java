@@ -66,4 +66,13 @@ public class UserStoryController {
         return userStoryList;
     }
 
+    @GetMapping(value = "/project/{projectId}/sprint/{sprintId}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<UserStory> getUserStoryListByProjectIdAndSprintId(@PathVariable(value = "projectId") Long projectId,
+                                                                  @PathVariable( value = "sprintId")  Long sprintId){
+        List<UserStory> userStoryList = userStoryService.findAllByProjectIdAndSprintId(projectId, sprintId);
+
+        return userStoryList;
+    }
+
 }
