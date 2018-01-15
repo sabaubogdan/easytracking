@@ -24,7 +24,7 @@ public class UserStoryController {
 
     @GetMapping(value = "/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public UserStory getUserStory(@PathVariable(value = "id") Long id){
+    public UserStory getUserStory(@PathVariable(value = "id") Long id) {
 
         UserStory userStory = userStoryService.getUserStory(id);
 
@@ -33,7 +33,7 @@ public class UserStoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserStory createUserStory(@RequestBody UserStory userStory){
+    public UserStory createUserStory(@RequestBody UserStory userStory) {
 
         UserStory createdUserStory = userStoryService.createUserStory(userStory);
 
@@ -43,7 +43,7 @@ public class UserStoryController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public UserStory updateUserStory(@RequestBody UserStory userStory){
+    public UserStory updateUserStory(@RequestBody UserStory userStory) {
 
         UserStory updatedUserStory = userStoryService.updateUserStory(userStory);
 
@@ -53,13 +53,13 @@ public class UserStoryController {
 
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletedUserStory(@PathVariable(value = "id") Long id){
+    public void deletedUserStory(@PathVariable(value = "id") Long id) {
         userStoryService.deleteUserStory(id);
     }
 
     @GetMapping(value = "/project/{id}")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<UserStory> getUserStoryListByProjectId(@PathVariable(value = "id") Long id){
+    public List<UserStory> getUserStoryListByProjectId(@PathVariable(value = "id") Long id) {
 
         List<UserStory> userStoryList = userStoryService.findAllByProjectId(id);
 
@@ -69,7 +69,7 @@ public class UserStoryController {
     @GetMapping(value = "/project/{projectId}/sprint/{sprintId}")
     @ResponseStatus(value = HttpStatus.OK)
     public List<UserStory> getUserStoryListByProjectIdAndSprintId(@PathVariable(value = "projectId") Long projectId,
-                                                                  @PathVariable( value = "sprintId")  Long sprintId){
+                                                                  @PathVariable(value = "sprintId") Long sprintId) {
         List<UserStory> userStoryList = userStoryService.findAllByProjectIdAndSprintId(projectId, sprintId);
 
         return userStoryList;
