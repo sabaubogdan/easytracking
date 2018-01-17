@@ -9,8 +9,11 @@ import xyz.vegaone.easytracking.dto.UserStory;
 import xyz.vegaone.easytracking.mapper.ProjectMapper;
 import xyz.vegaone.easytracking.mapper.UserStoryMapper;
 import xyz.vegaone.easytracking.repo.ProjectRepo;
+import xyz.vegaone.easytracking.repo.ProjectUserRepo;
 import xyz.vegaone.easytracking.repo.UserStoryRepo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,6 +28,8 @@ public class ProjectService {
     private UserStoryRepo userStoryRepo;
 
     private UserStoryMapper userStoryMapper;
+
+    private ProjectUserRepo projectUserRepo;
 
     @Autowired
     public ProjectService(ProjectMapper projectMapper, ProjectRepo projectRepo, UserStoryService userStoryService,
@@ -85,5 +90,12 @@ public class ProjectService {
 
     }
 
+    public List<Project> findAllByUserId(Long userId) {
+        List<ProjectEntity> projectEntityList = Collections.emptyList();
+
+        projectEntityList = projectUserRepo.findAllByUserId(userId);
+
+        return projectMapper.domainToDtoList(projectEntityList);
+    }
 
 }

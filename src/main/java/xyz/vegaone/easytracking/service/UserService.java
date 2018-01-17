@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.UserEntity;
 import xyz.vegaone.easytracking.dto.User;
 import xyz.vegaone.easytracking.mapper.UserMapper;
+import xyz.vegaone.easytracking.repo.ProjectUserRepo;
 import xyz.vegaone.easytracking.repo.UserRepo;
 
 import java.util.Collections;
@@ -16,6 +17,7 @@ public class UserService {
 
     private UserRepo userRepo;
     private UserMapper userMapper;
+    private ProjectUserRepo projectUserRepo;
 
     @Autowired
     public UserService(UserRepo userRepo, UserMapper userMapper) {
@@ -62,8 +64,10 @@ public class UserService {
 
     public List<User> findAllByProjectId(Long id) {
         List<UserEntity> userEntityList = Collections.emptyList();
-        userEntityList = userRepo.findAllByProjectId(id);
+
+        userEntityList = projectUserRepo.findAllByProjectId(id);
 
         return userMapper.domainToDtoList(userEntityList);
     }
+
 }
