@@ -119,6 +119,14 @@ public class UserStoryService {
 
         List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
 
+        for (UserStory userStory : userStoryList) {
+            userStory.setTaskList(taskService.findAllByUserStoryId(userStory.getId()));
+        }
+
+        for (UserStory userStory : userStoryList) {
+            userStory.setBugList(bugService.findAllByUserStoryId(userStory.getId()));
+        }
+
         return userStoryList;
     }
 }
