@@ -75,7 +75,11 @@ public class SprintService {
     public List<Sprint> findAllByProjectId(Long projectId) {
         List<SprintEntity> sprintEntityList = sprintRepo.findAllByProjectId(projectId);
 
-        return sprintMapper.domainToDtoList(sprintEntityList);
+        List<Sprint> sprintList = sprintMapper.domainToDtoList(sprintEntityList);
+
+        sprintList.forEach(sprint -> sprint.setUserStoryList(userStoryService.findAllByProjectIdAndSprintId(projectId, sprint.getId())));
+
+        return sprintList;
     }
 
 }
