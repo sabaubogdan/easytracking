@@ -26,29 +26,7 @@ public class UserStory {
 
     private Long sprintId;
 
-    public Long getSprintId() {
-        return sprintId;
-    }
-
-    public void setSprintId(Long sprintId) {
-        this.sprintId = sprintId;
-    }
-
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
-
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
+    private List<User> userList;
 
     public Long getId() {
         return id;
@@ -106,11 +84,43 @@ public class UserStory {
         this.status = status;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
     public List<Bug> getBugList() {
         return bugList;
     }
 
     public void setBugList(List<Bug> bugList) {
         this.bugList = bugList;
+    }
+
+    public Long getSprintId() {
+        return sprintId;
+    }
+
+    public void setSprintId(Long sprintId) {
+        this.sprintId = sprintId;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

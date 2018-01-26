@@ -1,9 +1,13 @@
 package xyz.vegaone.easytracking.domain;
 
-import xyz.vegaone.easytracking.dto.UserStory;
-
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -11,14 +15,17 @@ public class ProjectEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column(name = "id")
     private Long id;
 
-    @Column (name = "name")
+    @Column(name = "name")
     private String name;
 
-    @Column (name = "description")
+    @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "projectList")
+    private List<UserEntity> userList;
 
     public Long getId() {
         return id;
@@ -44,4 +51,11 @@ public class ProjectEntity {
         this.description = description;
     }
 
+    public List<UserEntity> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<UserEntity> userList) {
+        this.userList = userList;
+    }
 }

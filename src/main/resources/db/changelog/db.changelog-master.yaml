@@ -309,3 +309,100 @@
                   - column:
                       name: project_id
                       type: bigint
+   - changeSet:
+          id: 16
+          author: dragos
+          changes:
+            - createTable:
+                tableName: user_project
+                columns:
+                  - column:
+                      name: user_id
+                      type: bigint
+                      constraints:
+                        nullable: false
+                  - column:
+                      name: project_id
+                      type: bigint
+                      constraints:
+                        nullable: false
+   - changeSet:
+          id: 17
+          author: dragos
+          changes:
+            - addForeignKeyConstraint:
+                baseColumnNames: project_id
+                baseTableName: user_project
+                constraintName: fk_user_project_project
+                referencedColumnNames: id
+                referencedTableName: project
+   - changeSet:
+          id: 18
+          author: dragos
+          changes:
+            - addForeignKeyConstraint:
+                baseColumnNames: user_id
+                baseTableName: user_project
+                constraintName: fk_user_project_user
+                referencedColumnNames: id
+                referencedTableName: user
+   - changeSet:
+        id: 19
+        author: Dragos
+        changes:
+          - addColumn:
+             tableName: user_story
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint
+   - changeSet:
+          id: 20
+          author: dragos
+          changes:
+            - addForeignKeyConstraint:
+                baseColumnNames: user_id
+                baseTableName: user_story
+                constraintName: fk_user_story_user
+                referencedColumnNames: id
+                referencedTableName: user
+   - changeSet:
+        id: 21
+        author: Dragos
+        changes:
+          - addColumn:
+             tableName: task
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint
+   - changeSet:
+          id: 22
+          author: dragos
+          changes:
+            - addForeignKeyConstraint:
+                baseColumnNames: user_id
+                baseTableName: task
+                constraintName: fk_task_user
+                referencedColumnNames: id
+                referencedTableName: user
+   - changeSet:
+        id: 23
+        author: Dragos
+        changes:
+          - addColumn:
+             tableName: bug
+             columns:
+               - column:
+                   name: user_id
+                   type: bigint
+   - changeSet:
+          id: 24
+          author: dragos
+          changes:
+            - addForeignKeyConstraint:
+                baseColumnNames: user_id
+                baseTableName: bug
+                constraintName: fk_bug_user
+                referencedColumnNames: id
+                referencedTableName: user

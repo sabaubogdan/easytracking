@@ -1,5 +1,7 @@
 package xyz.vegaone.easytracking.dto;
 
+import java.util.List;
+
 public class Task {
 
     private Long id;
@@ -18,21 +20,7 @@ public class Task {
 
     private Long estimation;
 
-    public Long getEstimation() {
-        return estimation;
-    }
-
-    public void setEstimation(Long estimation) {
-        this.estimation = estimation;
-    }
-
-    public Long getUserStoryId() {
-        return userStoryId;
-    }
-
-    public void setUserStoryId(Long userStoryId) {
-        this.userStoryId = userStoryId;
-    }
+    private List<User> userList;
 
     public Long getId() {
         return id;
@@ -82,4 +70,27 @@ public class Task {
         this.status = status;
     }
 
+    public Long getUserStoryId() {
+        return userStoryId;
+    }
+
+    public void setUserStoryId(Long userStoryId) {
+        this.userStoryId = userStoryId;
+    }
+
+    public Long getEstimation() {
+        return estimation;
+    }
+
+    public void setEstimation(Long estimation) {
+        this.estimation = estimation;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
 }
