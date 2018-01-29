@@ -1,6 +1,5 @@
 package xyz.vegaone.easytracking.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
@@ -12,6 +11,8 @@ public class Project {
     private String description;
 
     private List<UserStory> userStories;
+
+    private List<User> userList;
 
     public Long getId() {
         return id;
@@ -43,5 +44,13 @@ public class Project {
 
     public void setUserStories(List<UserStory> userStories) {
         this.userStories = userStories;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

@@ -1,6 +1,13 @@
 package xyz.vegaone.easytracking.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "task")
@@ -8,7 +15,7 @@ public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "title")
@@ -32,13 +39,9 @@ public class TaskEntity {
     @Column(name = "estimation")
     private Long estimation;
 
-    public Long getEstimation() {
-        return estimation;
-    }
-
-    public void setEstimation(Long estimation) {
-        this.estimation = estimation;
-    }
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     public Long getId() {
         return id;
@@ -94,5 +97,21 @@ public class TaskEntity {
 
     public void setUserStoryId(Long userStoryId) {
         this.userStoryId = userStoryId;
+    }
+
+    public Long getEstimation() {
+        return estimation;
+    }
+
+    public void setEstimation(Long estimation) {
+        this.estimation = estimation;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }

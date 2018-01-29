@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>easytracking</name>
-	<description>An intuitive board to track tasks, userEntity stories, featureList, epics, bugs.</description>
+	<description>An intuitive board to track tasks, user stories, features, epics, bugs.</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

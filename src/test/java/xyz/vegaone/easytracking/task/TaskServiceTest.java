@@ -22,15 +22,15 @@ public class TaskServiceTest {
     private static final String STATUS = "Task status";
     private static final String TITLE = "Task title";
 
-    public static final String USERSTORY_TITLE = "Test title";
-    public static final String USERSTORY_DESCRIPTION = "Test description";
-    public static final String USERSTORY_OWNER = "Test OWNER";
-    public static final Integer USERSTORY_ESTIMATION = 123456;
-    public static final Integer USERSTORY_PRIORITY = 1;
+    private static final String USERSTORY_TITLE = "Test title";
+    private static final String USERSTORY_DESCRIPTION = "Test description";
+    private static final String USERSTORY_OWNER = "Test OWNER";
+    private static final Integer USERSTORY_ESTIMATION = 123456;
+    private static final Integer USERSTORY_PRIORITY = 1;
 
-    public static final Long PROJECT_ID = 1L;
+    private static final Long PROJECT_ID = 1L;
 
-    public static final String NEWUSERSTORY_TITLE = "New user story";
+    private static final String NEWUSERSTORY_TITLE = "New user story";
 
     @Autowired
     private TaskService taskService;
@@ -41,7 +41,7 @@ public class TaskServiceTest {
     @Test
     public void createTaskTest() {
         //given
-        UserStory savedUserStory  = buildAndSaveUserStory();
+        UserStory savedUserStory = buildAndSaveUserStory();
         //when
         Task savedTask = buildAndSaveTask(savedUserStory.getId());
 
@@ -105,6 +105,7 @@ public class TaskServiceTest {
         Assert.assertEquals("The task title should have matched", NEWUSERSTORY_TITLE, updatedTask.getTitle());
 
     }
+
     @Test
     public void findAllByUserStoryIdTest() {
         //given
@@ -140,7 +141,7 @@ public class TaskServiceTest {
 
     }
 
-    private UserStory buildAndSaveUserStory(){
+    private UserStory buildAndSaveUserStory() {
         UserStory userStory = new UserStory();
         userStory.setTitle(USERSTORY_TITLE);
         userStory.setDescription(USERSTORY_DESCRIPTION);
@@ -150,13 +151,11 @@ public class TaskServiceTest {
         userStory.setProjectId(PROJECT_ID);
         userStory.setStatus(STATUS);
 
-        UserStory savedUserStory = userStoryService.createUserStory(userStory);
 
-
-        return savedUserStory;
+        return userStoryService.createUserStory(userStory);
     }
 
-    private Task buildAndSaveTask(Long userStoryId){
+    private Task buildAndSaveTask(Long userStoryId) {
 
         Task task = new Task();
         task.setUserStoryId(userStoryId);
@@ -166,10 +165,7 @@ public class TaskServiceTest {
         task.setStatus(STATUS);
         task.setTitle(TITLE);
 
-        Task savedTask = taskService.createTask(task);
-
-        return savedTask;
-
+        return taskService.createTask(task);
     }
 
 }

@@ -7,13 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.vegaone.easytracking.dto.Project;
+import xyz.vegaone.easytracking.dto.User;
 import xyz.vegaone.easytracking.service.ProjectService;
+import xyz.vegaone.easytracking.service.UserService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ProjectServiceTest {
+
+    private static final String USER_NAME = "TestName";
+    private static final String USER_EMAIL = "user@email.com";
 
     public static final String PROJECT_DESCRIPTION = "Project test";
     public static final String PROJECT_NAME = "Project name";
@@ -22,12 +28,18 @@ public class ProjectServiceTest {
     @Autowired
     private ProjectService projectService;
 
+    @Autowired
+    private UserService userService;
+
     @Test
     public void createProjectTest() {
         //given
 
         //when
-        Project savedProject = projectService.createProject(createNewProject());
+        Project project = buildAndSaveProject();
+        project.setUserList(Arrays.asList(buildAndSaveUser()));
+
+        Project savedProject = projectService.createProject(project);
 
         //then
         Assert.assertNotNull("There should have been one project saved in the database", savedProject);
@@ -39,8 +51,7 @@ public class ProjectServiceTest {
     @Test
     public void getProjectTest() {
         //given
-
-        Project savedProject = projectService.createProject(createNewProject());
+        Project savedProject = projectService.createProject(buildAndSaveProject());
 
         //when
         Project findProject = projectService.getProject(savedProject.getId());
@@ -53,9 +64,11 @@ public class ProjectServiceTest {
     }
 
     @Test
-    public void deleteTask() {
+    public void deleteProjetTest() {
         //given
-        Project savedProject = projectService.createProject(createNewProject());
+        Project newProject = buildAndSaveProject();
+        newProject.setName("deleteProjectTest");
+        Project savedProject = projectService.createProject(newProject);
 
         //when
         projectService.deleteProject(savedProject.getId());
@@ -68,7 +81,9 @@ public class ProjectServiceTest {
     @Test
     public void updateProjectServiceTest() {
         //given
-        Project savedProject = projectService.createProject(createNewProject());
+        Project newProject = buildAndSaveProject();
+        newProject.setName("updateProjectTest");
+        Project savedProject = projectService.createProject(newProject);
 
         //when
         savedProject.setName(PROJECT_NEW_NAME);
@@ -82,8 +97,8 @@ public class ProjectServiceTest {
     @Test
     public void getAllProjectsTest() {
         //given
-        Project savedProjectOne = projectService.createProject(createNewProject());
-        Project savedProjectTwo = projectService.createProject(createNewProject());
+        Project savedProjectOne = projectService.createProject(buildAndSaveProject());
+        Project savedProjectTwo = projectService.createProject(buildAndSaveProject());
 
         //when
         List<Project> findResult = projectService.getAllProjects();
@@ -93,13 +108,22 @@ public class ProjectServiceTest {
 
     }
 
-    private Project createNewProject() {
+    private Project buildAndSaveProject() {
 
         Project project = new Project();
         project.setDescription(PROJECT_DESCRIPTION);
         project.setName(PROJECT_NAME);
 
         return project;
+    }
+
+    private User buildAndSaveUser() {
+        User user = new User();
+
+        user.setName(USER_NAME);
+        user.setEmail(USER_EMAIL);
+
+        return userService.createUser(user);
     }
 
 }
