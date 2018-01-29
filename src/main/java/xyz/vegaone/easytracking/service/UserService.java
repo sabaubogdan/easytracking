@@ -7,6 +7,8 @@ import xyz.vegaone.easytracking.dto.User;
 import xyz.vegaone.easytracking.mapper.UserMapper;
 import xyz.vegaone.easytracking.repo.UserRepo;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,5 +56,13 @@ public class UserService {
         UserEntity savedUserEntity = userRepo.save(userEntity);
 
         return userMapper.domainToDto(savedUserEntity);
+    }
+
+    public List<User> findAll(){
+        List<UserEntity> userEntityList = Collections.emptyList();
+
+        userEntityList = userRepo.findAll();
+
+        return userMapper.domainToDtoList(userEntityList);
     }
 }

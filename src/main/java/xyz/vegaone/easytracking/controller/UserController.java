@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.vegaone.easytracking.dto.User;
 import xyz.vegaone.easytracking.service.UserService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/user")
 @Slf4j
@@ -55,5 +57,11 @@ public class UserController {
     public void userDeleted(@PathVariable(value = "id") Long id) {
 
         userService.deleteUserById(id);
+    }
+
+    @GetMapping(value = "/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<User> findAll(){
+        return userService.findAll();
     }
 }
