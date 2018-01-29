@@ -26,7 +26,7 @@ public class UserStory {
 
     private Long sprintId;
 
-    private List<User> userList;
+    private User user;
 
     public Long getId() {
         return id;
@@ -116,11 +116,11 @@ public class UserStory {
         this.sprintId = sprintId;
     }
 
-    public List<User> getUserList() {
-        return userList;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

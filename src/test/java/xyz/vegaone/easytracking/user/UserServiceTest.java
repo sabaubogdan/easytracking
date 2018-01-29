@@ -16,7 +16,6 @@ import xyz.vegaone.easytracking.service.TaskService;
 import xyz.vegaone.easytracking.service.UserService;
 import xyz.vegaone.easytracking.service.UserStoryService;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootTest
@@ -129,7 +128,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findAllTest(){
+    public void findAllTest() {
         //given
         User savedUser1 = buildAndSaveUser();
         User savedUser2 = buildAndSaveUser();
@@ -150,7 +149,7 @@ public class UserServiceTest {
         userStory.setPriority(USERSTORY_PRIORITY);
         userStory.setStatus(USERSTORY_STATUS);
         userStory.setProjectId(USERSTORY_PROJECT_ID);
-        userStory.setUserList(Arrays.asList(user));
+        userStory.setUser(user);
 
         return userStoryService.createUserStory(userStory);
     }
@@ -164,7 +163,7 @@ public class UserServiceTest {
         bug.setPriority(BUG_PRIORITY);
         bug.setStatus(BUG_STATUS);
         bug.setTitle(BUG_TITLE);
-        bug.setUserList(Arrays.asList(user));
+        bug.setUser(user);
 
         return bugService.createBug(bug);
 
@@ -187,7 +186,7 @@ public class UserServiceTest {
         task.setPriority(TASK_PRIORITY);
         task.setStatus(TASK_STATUS);
         task.setTitle(TASK_TITLE);
-        task.setUserList(Arrays.asList(user));
+        task.setUser(user);
 
         return taskService.createTask(task);
 
