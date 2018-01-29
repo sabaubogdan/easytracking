@@ -17,6 +17,7 @@ import xyz.vegaone.easytracking.service.UserService;
 import xyz.vegaone.easytracking.service.UserStoryService;
 
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -125,6 +126,19 @@ public class UserServiceTest {
         Assert.assertNotNull("There should have been one user in the database", findResult);
         Assert.assertEquals("The email should have matched", NEW_USER_EMAIL, findResult.getEmail());
 
+    }
+
+    @Test
+    public void findAllTest(){
+        //given
+        User savedUser1 = buildAndSaveUser();
+        User savedUser2 = buildAndSaveUser();
+
+        //when
+        List<User> findUser = userService.findAll();
+
+        //then
+        Assert.assertEquals("There should have been two users in the database", 2, findUser.size());
     }
 
     private UserStory buildAndSaveUserStory(User user) {
