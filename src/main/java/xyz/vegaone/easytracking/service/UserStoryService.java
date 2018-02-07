@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserStoryService {
 
     private UserStoryMapper userStoryMapper;
@@ -35,6 +37,8 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllByProjectId(Long id) {
+        log.info("Entering the service method findAllByProjectId() having id: " + id);
+
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);
 
         List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
@@ -51,6 +55,8 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllBySprintId(Long id) {
+        log.info("Entering the service method findAllBySprintId() having id: " + id);
+
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllBySprintId(id);
 
         List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
@@ -60,11 +66,14 @@ public class UserStoryService {
     }
 
     public void deleteAllByProjectId(Long id) {
+        log.info("Entering the service method deleteAllByProjectId() having id: " + id);
+
         taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteAllByProjectId(id);
     }
 
     public UserStory createUserStory(UserStory userStory) {
+        log.info("Entering the service method createUserStory() having userStoryid: " + userStory.getId());
 
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserStoryEntity = userStoryRepo.save(userStoryEntity);
@@ -76,6 +85,8 @@ public class UserStoryService {
     }
 
     public UserStory getUserStory(Long id) {
+        log.info("Entering the service method getUserStory() having id: " + id);
+
         Optional<UserStoryEntity> getResultOptional = userStoryRepo.findById(id);
         UserStoryEntity userStoryEntity = null;
 
@@ -98,12 +109,16 @@ public class UserStoryService {
 
     @Transactional
     public void deleteUserStory(Long id) {
+        log.info("Entering the service method deleteUserStory() having id: " + id);
+
         taskService.deleteAllByUserStoryId(id);
         bugService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteById(id);
     }
 
     public UserStory updateUserStory(UserStory userStory) {
+        log.info("Entering the service method updateUserStory() having userStoryId: " + userStory.getId());
+
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserEntity = userStoryRepo.save(userStoryEntity);
 
@@ -115,6 +130,8 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllByProjectIdAndSprintId(Long projectId, Long sprintId) {
+        log.info("Entering the service method findAllByProjectIdAndSprintId() having projectId, sprintId: " + projectId + ", " + sprintId);
+
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectIdAndSprintId(projectId, sprintId);
 
         List<UserStory> userStoryList = userStoryMapper.domainToDtoList(userStoryEntityList);
