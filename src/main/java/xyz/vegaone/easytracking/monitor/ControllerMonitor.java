@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class ControllerMonitor {
 
     @Before("execution(* xyz.vegaone.easytracking.controller..*(..))")
-    public void logController(JoinPoint joinPoint){
+    public void logController(JoinPoint joinPoint) {
         log.info("Accesing the " + joinPoint + " having the parameter id:" + joinPoint.getArgs());
     }
 }
