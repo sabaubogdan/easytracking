@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.TaskEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class TaskService {
 
     private TaskRepo taskRepo;
@@ -25,6 +27,7 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
+        log.info("Entering the service method createTask() having taskId: " + task.getId());
 
         TaskEntity taskEntity = taskMapper.dtoToDomain(task);
 
@@ -34,6 +37,8 @@ public class TaskService {
     }
 
     public Task getTask(Long id) {
+        log.info("Entering the service method getTask() having id: " + id);
+
         Optional<TaskEntity> taskOptional = taskRepo.findById(id);
 
         if (taskOptional.isPresent()) {
@@ -46,15 +51,21 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
+        log.info("Entering the service method deleteTask() having id: " + id);
+
         taskRepo.deleteById(id);
     }
 
     public void deleteAllByUserStoryId(Long id){
+        log.info("Entering the service method deleteAllByUserStoryId() having id: " + id);
+
         taskRepo.deleteAllByUserStoryId(id);
     }
 
 
     public Task updateTask(Task task) {
+        log.info("Entering the service method updateTask() having taskId: " + task.getId());
+
         TaskEntity taskEntity = taskMapper.dtoToDomain(task);
 
         TaskEntity savedTaskEntity = taskRepo.save(taskEntity);
@@ -63,6 +74,8 @@ public class TaskService {
     }
 
     public List<Task> findAllByUserStoryId(Long userStoryId) {
+        log.info("Entering the service method findAllByUserStoryId() having userStoryId: " + userStoryId);
+
         List<TaskEntity> taskEntityList = Collections.emptyList();
 
         taskEntityList = taskRepo.findAllByUserStoryId(userStoryId);

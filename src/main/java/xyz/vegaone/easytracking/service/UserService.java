@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.UserEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserService {
 
     private UserRepo userRepo;
@@ -26,6 +28,7 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        log.info("Entering the service method createUser() having userId: " + user.getId());
 
         UserEntity userEntity = userMapper.dtoToDomain(user);
 
@@ -35,6 +38,7 @@ public class UserService {
     }
 
     public User getUser(Long id) {
+        log.info("Entering the service method getUser() having id: " + id);
         Optional<UserEntity> userOptional = userRepo.findById(id);
 
         if (userOptional.isPresent()) {
@@ -47,10 +51,12 @@ public class UserService {
     }
 
     public void deleteUserById(Long id) {
+        log.info("Entering the service method deleteUserById() having id: " + id);
         userRepo.deleteById(id);
     }
 
     public User updateUser(User user) {
+        log.info("Entering the service method updateUser() having userId: " + user.getId());
         UserEntity userEntity = userMapper.dtoToDomain(user);
 
         UserEntity savedUserEntity = userRepo.save(userEntity);
@@ -59,6 +65,7 @@ public class UserService {
     }
 
     public List<User> findAll(){
+        log.info("Entering the service method findAll() ");
         List<UserEntity> userEntityList = Collections.emptyList();
 
         userEntityList = userRepo.findAll();

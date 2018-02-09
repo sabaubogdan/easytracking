@@ -43,4 +43,14 @@ public class User {
     public void setProjectList(List<Project> projectList) {
         this.projectList = projectList;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", projectList=" + projectList +
+                '}';
+    }
 }

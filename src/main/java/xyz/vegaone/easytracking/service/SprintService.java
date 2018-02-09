@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.SprintEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class SprintService {
 
     private SprintRepo sprintRepo;
@@ -30,6 +32,8 @@ public class SprintService {
 
 
     public Sprint createSprint(Sprint sprint) {
+        log.info("Entering the service method createSprint() having sprintId: " + sprint.getId());
+
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
         Sprint savedSprint = sprintMapper.domainToDto(savedSprintEntity);
@@ -42,6 +46,8 @@ public class SprintService {
     }
 
     public Sprint getSprint(Long id) {
+        log.info("Entering the service method getSprint() having id: " + id);
+
         Optional<SprintEntity> getResultOptional = sprintRepo.findById(id);
         SprintEntity sprintEntity = null;
 
@@ -59,10 +65,14 @@ public class SprintService {
     }
 
     public void deleteSprint(Long id) {
+        log.info("Entering the service method deleteSprint() having id: " + id);
+
         sprintRepo.deleteById(id);
     }
 
     public Sprint updateSprint(Sprint sprint) {
+        log.info("Entering the service method updateSprint() having sprintId: " + sprint.getId());
+
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
 
@@ -73,6 +83,8 @@ public class SprintService {
 
 
     public List<Sprint> findAllByProjectId(Long projectId) {
+        log.info("Entering the service method findAllByProjectId() having id: " + projectId);
+
         List<SprintEntity> sprintEntityList = sprintRepo.findAllByProjectId(projectId);
 
         List<Sprint> sprintList = sprintMapper.domainToDtoList(sprintEntityList);

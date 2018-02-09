@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.BugEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class BugService {
 
     private BugRepo bugRepo;
@@ -26,6 +28,7 @@ public class BugService {
     }
 
     public Bug createBug(Bug bug) {
+        log.info("Entering the service method createBug() having budId: " + bug.getId());
 
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
 
@@ -35,6 +38,8 @@ public class BugService {
     }
 
     public Bug getBug(Long id) {
+        log.info("Entering the service method getBug() having Id: " + id);
+
         Optional<BugEntity> bugOptional = bugRepo.findById(id);
 
         if (bugOptional.isPresent()) {
@@ -47,10 +52,15 @@ public class BugService {
     }
 
     public void deleteBug(Long id) {
+        log.info("Entering the service method deleteBug() having Id: " + id);
+
+
         bugRepo.deleteById(id);
     }
 
     public Bug updateBug(Bug bug) {
+        log.info("Entering the service method updateBug() having bugId: " + bug.getId());
+
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
 
         BugEntity savedBugEntity = bugRepo.save(bugEntity);
@@ -59,6 +69,8 @@ public class BugService {
     }
 
     public List<Bug> findAllByUserStoryId(Long userStoryId) {
+        log.info("Entering the service method findAllByUserStoryId() having userStoryId: " + userStoryId);
+
         List<BugEntity> bugEntityList = Collections.emptyList();
 
         bugEntityList = bugRepo.findAllByUserStoryId(userStoryId);
@@ -67,6 +79,8 @@ public class BugService {
     }
 
     public void deleteAllByUserStoryId(Long id){
+        log.info("Entering the service method deleteAllByUserStoryId() having id: " + id);
+
         bugRepo.deleteAllByUserStoryId(id);
     }
 }

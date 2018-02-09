@@ -1,5 +1,6 @@
 package xyz.vegaone.easytracking.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.vegaone.easytracking.domain.ProjectEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class ProjectService {
 
     private ProjectMapper projectMapper;
@@ -38,6 +40,8 @@ public class ProjectService {
     }
 
     public Project createProject(Project project) {
+        log.info("Entering the service method createProject() having projectId: " + project.getId());
+
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
         ProjectEntity savedProject = projectRepo.save(projectEntity);
 
@@ -48,6 +52,7 @@ public class ProjectService {
     }
 
     public Project getProject(Long id) {
+        log.info("Entering the service method getProject() having id: " + id);
 
         Optional<ProjectEntity> projectOptional = projectRepo.findById(id);
 
@@ -72,6 +77,7 @@ public class ProjectService {
     }
 
     public List<Project> getAllProjects() {
+        log.info("Entering the service method getAllProjects() " );
 
         List<ProjectEntity> projectEntityList = projectRepo.findAll();
 
@@ -79,11 +85,15 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id) {
+        log.info("Entering the service method deleteProject() having id " + id );
+
         userStoryService.deleteAllByProjectId(id);
         projectRepo.deleteById(id);
     }
 
     public Project updateProject(Project project) {
+        log.info("Entering the service method updateProject() having projectId " + project.getId() );
+
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
 
         ProjectEntity savedProjectEntity = projectRepo.save(projectEntity);
