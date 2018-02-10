@@ -40,7 +40,7 @@ public class ProjectService {
     }
 
     public Project createProject(Project project) {
-        log.info("Entering the service method createProject() having projectId: " + project.getId());
+        log.info("Creating project: " + project.getId());
 
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
         ProjectEntity savedProject = projectRepo.save(projectEntity);
@@ -52,7 +52,7 @@ public class ProjectService {
     }
 
     public Project getProject(Long id) {
-        log.info("Entering the service method getProject() having id: " + id);
+        log.info("Fetching project with id: " + id);
 
         Optional<ProjectEntity> projectOptional = projectRepo.findById(id);
 
@@ -77,7 +77,7 @@ public class ProjectService {
     }
 
     public List<Project> getAllProjects() {
-        log.info("Entering the service method getAllProjects() " );
+        log.info("Fetching all projects " );
 
         List<ProjectEntity> projectEntityList = projectRepo.findAll();
 
@@ -85,14 +85,14 @@ public class ProjectService {
     }
 
     public void deleteProject(Long id) {
-        log.info("Entering the service method deleteProject() having id " + id );
+        log.info("Deleting project with id: " + id );
 
         userStoryService.deleteAllByProjectId(id);
         projectRepo.deleteById(id);
     }
 
     public Project updateProject(Project project) {
-        log.info("Entering the service method updateProject() having projectId " + project.getId() );
+        log.info("Updating project " + project);
 
         ProjectEntity projectEntity = projectMapper.dtoToDomain(project);
 

@@ -1,7 +1,5 @@
 package xyz.vegaone.easytracking.dto;
 
-import java.util.List;
-
 public class Bug {
 
     private Long id;
@@ -92,5 +90,20 @@ public class Bug {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Bug{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", owner='" + owner + '\'' +
+                ", priority=" + priority +
+                ", status='" + status + '\'' +
+                ", userStoryId=" + userStoryId +
+                ", estimation=" + estimation +
+                ", user=" + user +
+                '}';
     }
 }

@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        log.info("Entering the service method createUser() having userId: " + user.getId());
+        log.info("Creating user: " + user);
 
         UserEntity userEntity = userMapper.dtoToDomain(user);
 
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     public User getUser(Long id) {
-        log.info("Entering the service method getUser() having id: " + id);
+        log.info("Fetching user with id: " + id);
         Optional<UserEntity> userOptional = userRepo.findById(id);
 
         if (userOptional.isPresent()) {
@@ -51,12 +51,12 @@ public class UserService {
     }
 
     public void deleteUserById(Long id) {
-        log.info("Entering the service method deleteUserById() having id: " + id);
+        log.info("Deleting user with id: " + id);
         userRepo.deleteById(id);
     }
 
     public User updateUser(User user) {
-        log.info("Entering the service method updateUser() having userId: " + user.getId());
+        log.info("Updating user: " + user.getId());
         UserEntity userEntity = userMapper.dtoToDomain(user);
 
         UserEntity savedUserEntity = userRepo.save(userEntity);
@@ -65,7 +65,7 @@ public class UserService {
     }
 
     public List<User> findAll(){
-        log.info("Entering the service method findAll() ");
+        log.info("Fetching all users");
         List<UserEntity> userEntityList = Collections.emptyList();
 
         userEntityList = userRepo.findAll();

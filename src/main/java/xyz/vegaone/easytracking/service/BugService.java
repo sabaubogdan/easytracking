@@ -28,7 +28,7 @@ public class BugService {
     }
 
     public Bug createBug(Bug bug) {
-        log.info("Entering the service method createBug() having budId: " + bug.getId());
+        log.info("Creating bug: " + bug.getId());
 
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
 
@@ -38,7 +38,7 @@ public class BugService {
     }
 
     public Bug getBug(Long id) {
-        log.info("Entering the service method getBug() having Id: " + id);
+        log.info("Fetching bug with id: " + id);
 
         Optional<BugEntity> bugOptional = bugRepo.findById(id);
 
@@ -52,14 +52,14 @@ public class BugService {
     }
 
     public void deleteBug(Long id) {
-        log.info("Entering the service method deleteBug() having Id: " + id);
+        log.info("Deleting bug with id: " + id);
 
 
         bugRepo.deleteById(id);
     }
 
     public Bug updateBug(Bug bug) {
-        log.info("Entering the service method updateBug() having bugId: " + bug.getId());
+        log.info("Updating bug: " + bug.getId());
 
         BugEntity bugEntity = bugMapper.dtoToDomain(bug);
 
@@ -69,7 +69,7 @@ public class BugService {
     }
 
     public List<Bug> findAllByUserStoryId(Long userStoryId) {
-        log.info("Entering the service method findAllByUserStoryId() having userStoryId: " + userStoryId);
+        log.info("Finding all bugs by userStoryId: " + userStoryId);
 
         List<BugEntity> bugEntityList = Collections.emptyList();
 
@@ -79,7 +79,7 @@ public class BugService {
     }
 
     public void deleteAllByUserStoryId(Long id){
-        log.info("Entering the service method deleteAllByUserStoryId() having id: " + id);
+        log.info("Deleting all bugs by userStoryId: " + id);
 
         bugRepo.deleteAllByUserStoryId(id);
     }

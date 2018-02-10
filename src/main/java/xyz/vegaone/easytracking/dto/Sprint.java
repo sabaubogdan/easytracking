@@ -64,4 +64,16 @@ public class Sprint {
     public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
+
+    @Override
+    public String toString() {
+        return "Sprint{" +
+                "id=" + id +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", sprintNumber=" + sprintNumber +
+                ", projectId=" + projectId +
+                ", userStoryList=" + userStoryList +
+                '}';
+    }
 }

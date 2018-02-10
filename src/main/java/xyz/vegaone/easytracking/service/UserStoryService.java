@@ -37,7 +37,7 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllByProjectId(Long id) {
-        log.info("Entering the service method findAllByProjectId() having id: " + id);
+        log.info("Fetching all userStories by project id: " + id);
 
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectId(id);
 
@@ -55,7 +55,7 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllBySprintId(Long id) {
-        log.info("Entering the service method findAllBySprintId() having id: " + id);
+        log.info("Fetching all userStories by spring id: " + id);
 
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllBySprintId(id);
 
@@ -66,14 +66,14 @@ public class UserStoryService {
     }
 
     public void deleteAllByProjectId(Long id) {
-        log.info("Entering the service method deleteAllByProjectId() having id: " + id);
+        log.info("Delete all projects by: " + id);
 
         taskService.deleteAllByUserStoryId(id);
         userStoryRepo.deleteAllByProjectId(id);
     }
 
     public UserStory createUserStory(UserStory userStory) {
-        log.info("Entering the service method createUserStory() having userStoryid: " + userStory.getId());
+        log.info("Creating user story " + userStory);
 
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserStoryEntity = userStoryRepo.save(userStoryEntity);
@@ -85,7 +85,7 @@ public class UserStoryService {
     }
 
     public UserStory getUserStory(Long id) {
-        log.info("Entering the service method getUserStory() having id: " + id);
+        log.info("Fetching userStory by id: " + id);
 
         Optional<UserStoryEntity> getResultOptional = userStoryRepo.findById(id);
         UserStoryEntity userStoryEntity = null;
@@ -109,7 +109,7 @@ public class UserStoryService {
 
     @Transactional
     public void deleteUserStory(Long id) {
-        log.info("Entering the service method deleteUserStory() having id: " + id);
+        log.info("Deleting all users with id: " + id);
 
         taskService.deleteAllByUserStoryId(id);
         bugService.deleteAllByUserStoryId(id);
@@ -117,7 +117,7 @@ public class UserStoryService {
     }
 
     public UserStory updateUserStory(UserStory userStory) {
-        log.info("Entering the service method updateUserStory() having userStoryId: " + userStory.getId());
+        log.info("Updating userStory: " + userStory);
 
         UserStoryEntity userStoryEntity = userStoryMapper.dtoToDomain(userStory);
         UserStoryEntity savedUserEntity = userStoryRepo.save(userStoryEntity);
@@ -130,7 +130,7 @@ public class UserStoryService {
     }
 
     public List<UserStory> findAllByProjectIdAndSprintId(Long projectId, Long sprintId) {
-        log.info("Entering the service method findAllByProjectIdAndSprintId() having projectId, sprintId: " + projectId + ", " + sprintId);
+        log.info("Finding userStories with projectId, sprintId: " + projectId + ", " + sprintId);
 
         List<UserStoryEntity> userStoryEntityList = userStoryRepo.findAllByProjectIdAndSprintId(projectId, sprintId);
 

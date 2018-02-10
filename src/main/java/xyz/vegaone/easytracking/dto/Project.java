@@ -53,4 +53,15 @@ public class Project {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", userStories=" + userStories +
+                ", userList=" + userList +
+                '}';
+    }
 }

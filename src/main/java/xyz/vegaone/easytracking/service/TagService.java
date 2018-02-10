@@ -28,7 +28,7 @@ public class TagService {
     }
 
     public Tag createTag(Tag tag){
-        log.info("Entering the service method createTag() having tagId: " + tag.getId());
+        log.info("Creating tag: " + tag);
 
         TagEntity tagEntity = tagMapper.dtoToDomain(tag);
 
@@ -38,7 +38,7 @@ public class TagService {
     }
 
     public Tag getTag(Long id){
-        log.info("Entering the service method getTag() having id: " + id);
+        log.info("Fetching tag with id: " + id);
 
         Optional<TagEntity> tagOptional = tagRepo.findById(id);
 
@@ -51,13 +51,13 @@ public class TagService {
     }
 
     public void deleteTag(Long id){
-        log.info("Entering the service method deleteTag() having id: " + id);
+        log.info("Deleting tag with id: " + id);
 
         tagRepo.deleteById(id);
     }
 
     public Tag updateTag(Tag tag){
-        log.info("Entering the service method updateTag() having tagId: " + tag.getId());
+        log.info("Updating tag: " + tag.getId());
 
         TagEntity tagEntity = tagMapper.dtoToDomain(tag);
 
@@ -66,7 +66,7 @@ public class TagService {
         return tagMapper.domainToDto(savedTagEntity);
     }
     public List<Tag> getAllTagsByTaskId(Long taskId){
-        log.info("Entering the service method getAllTagsByTaskId() having taskId: " +taskId);
+        log.info("Fetching all tags by task id: " +taskId);
 
         List<TagEntity> tagEntityList = Collections.emptyList();
 
@@ -75,13 +75,13 @@ public class TagService {
         return tagMapper.domainToDtoList(tagEntityList);
     }
     public void deleteAllByTaskId(Long id){
-        log.info("Entering the service method deleteAllByTaskId() having id: " + id);
+        log.info("Deleting all tags by task id: " + id);
 
         tagRepo.deleteAllByTaskId(id);
     }
 
     public List<Tag> getAllTagsByUserStorId(Long userStoryId){
-        log.info("Entering the service method getAllTagsByUserStorId() having userStoryId: " + userStoryId);
+        log.info("Fetching all tags by userStory id " + userStoryId);
 
         List<TagEntity> tagEntityList = Collections.emptyList();
 
@@ -90,13 +90,13 @@ public class TagService {
         return tagMapper.domainToDtoList(tagEntityList);
     }
     public void deleteAllByUserStoryId(Long id){
-        log.info("Entering the service method deleteAllByUserStoryId() having id: " + id);
+        log.info("Delete all tags by user story id: " + id);
 
         tagRepo.deleteAllByUserStoryId(id);
     }
 
     public List<Tag> getAllTagsByBugId(Long bugId){
-        log.info("Entering the service method getAllTagsByBugId() having bugId: " + bugId);
+        log.info("Fetching all tags by bug id: " + bugId);
 
         List<TagEntity> tagEntityList = Collections.emptyList();
 
@@ -105,7 +105,7 @@ public class TagService {
         return tagMapper.domainToDtoList(tagEntityList);
     }
     public void deleteAllByBugId(Long id){
-        log.info("Entering the service method deleteAllByBugId() having id: " + id);
+        log.info("Delete all tags by bug id: " + id);
 
         tagRepo.deleteAllByBugId(id);
     }
