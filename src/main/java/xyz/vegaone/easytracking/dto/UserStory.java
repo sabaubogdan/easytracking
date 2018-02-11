@@ -123,4 +123,22 @@ public class UserStory {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @Override
+    public String toString() {
+        return "UserStory{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", owner='" + owner + '\'' +
+                ", priority=" + priority +
+                ", estimation=" + estimation +
+                ", status='" + status + '\'' +
+                ", projectId=" + projectId +
+                ", taskList=" + taskList +
+                ", bugList=" + bugList +
+                ", sprintId=" + sprintId +
+                ", user=" + user +
+                '}';
+    }
 }

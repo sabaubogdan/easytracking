@@ -32,7 +32,7 @@ public class SprintService {
 
 
     public Sprint createSprint(Sprint sprint) {
-        log.info("Entering the service method createSprint() having sprintId: " + sprint.getId());
+        log.info("Creating sprint" + sprint.getId());
 
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
@@ -46,7 +46,7 @@ public class SprintService {
     }
 
     public Sprint getSprint(Long id) {
-        log.info("Entering the service method getSprint() having id: " + id);
+        log.info("Fetching sprint with id: " + id);
 
         Optional<SprintEntity> getResultOptional = sprintRepo.findById(id);
         SprintEntity sprintEntity = null;
@@ -65,13 +65,13 @@ public class SprintService {
     }
 
     public void deleteSprint(Long id) {
-        log.info("Entering the service method deleteSprint() having id: " + id);
+        log.info("Deleting spring with id: " + id);
 
         sprintRepo.deleteById(id);
     }
 
     public Sprint updateSprint(Sprint sprint) {
-        log.info("Entering the service method updateSprint() having sprintId: " + sprint.getId());
+        log.info("Updating sprint " + sprint);
 
         SprintEntity sprintEntity = sprintMapper.dtoToDomain(sprint);
         SprintEntity savedSprintEntity = sprintRepo.save(sprintEntity);
@@ -83,7 +83,7 @@ public class SprintService {
 
 
     public List<Sprint> findAllByProjectId(Long projectId) {
-        log.info("Entering the service method findAllByProjectId() having id: " + projectId);
+        log.info("Finding all sprints by project id: " + projectId);
 
         List<SprintEntity> sprintEntityList = sprintRepo.findAllByProjectId(projectId);
 

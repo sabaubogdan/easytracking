@@ -27,7 +27,7 @@ public class TaskService {
     }
 
     public Task createTask(Task task) {
-        log.info("Entering the service method createTask() having taskId: " + task.getId());
+        log.info("Creating task: " + task);
 
         TaskEntity taskEntity = taskMapper.dtoToDomain(task);
 
@@ -37,7 +37,7 @@ public class TaskService {
     }
 
     public Task getTask(Long id) {
-        log.info("Entering the service method getTask() having id: " + id);
+        log.info("Fetching task with id: " + id);
 
         Optional<TaskEntity> taskOptional = taskRepo.findById(id);
 
@@ -51,20 +51,20 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
-        log.info("Entering the service method deleteTask() having id: " + id);
+        log.info("Deleting task with id: " + id);
 
         taskRepo.deleteById(id);
     }
 
     public void deleteAllByUserStoryId(Long id){
-        log.info("Entering the service method deleteAllByUserStoryId() having id: " + id);
+        log.info("Deleting all tasks by userStory id: " + id);
 
         taskRepo.deleteAllByUserStoryId(id);
     }
 
 
     public Task updateTask(Task task) {
-        log.info("Entering the service method updateTask() having taskId: " + task.getId());
+        log.info("Updating task " + task);
 
         TaskEntity taskEntity = taskMapper.dtoToDomain(task);
 
@@ -74,7 +74,7 @@ public class TaskService {
     }
 
     public List<Task> findAllByUserStoryId(Long userStoryId) {
-        log.info("Entering the service method findAllByUserStoryId() having userStoryId: " + userStoryId);
+        log.info("Find all tasks by userStory id: " + userStoryId);
 
         List<TaskEntity> taskEntityList = Collections.emptyList();
 
