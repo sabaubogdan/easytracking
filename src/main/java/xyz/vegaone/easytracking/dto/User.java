@@ -1,7 +1,5 @@
 package xyz.vegaone.easytracking.dto;
 
-import java.util.List;
-
 public class User {
 
     private Long id;
@@ -9,8 +7,6 @@ public class User {
     private String name;
 
     private String email;
-
-    private List<Project> projectList;
 
     public Long getId() {
         return id;
