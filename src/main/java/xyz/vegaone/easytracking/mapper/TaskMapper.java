@@ -10,7 +10,10 @@ import java.util.List;
 public interface TaskMapper {
 
     Task domainToDto(TaskEntity taskEntity);
+
     TaskEntity dtoToDomain(Task task);
+
     List<Task> domainToDtoList(List<TaskEntity> taskEntities);
+
     List<TaskEntity> dtoToDomainList(List<Task> taskList);
 }
